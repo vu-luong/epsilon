@@ -75,10 +75,10 @@ Recommender.getBasicRecommendations = function (allCourses, requirement, cb){
 				res.push(courseHasID[knn[i].id]);
 			}
 			cb(null, res);
-			console.log('allCourses length: ' + res.length);
-			for (var j = 0; j < res.length; j++){
-				console.log(res[j].id);
-			}
+			// console.log('allCourses length: ' + res.length);
+			// for (var j = 0; j < res.length; j++){
+			// 	console.log(res[j].id);
+			// }
 }
 
 Recommender.getAdvanceRecommendations = function (learner_id, requirement, cb){

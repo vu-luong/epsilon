@@ -49,7 +49,6 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Vi
     @Override
     public CourseListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
                                                            int viewType) {
-        Log.i(TAG, "calling this");
 //         create a new view
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_course, parent, false);
