@@ -6,20 +6,16 @@ var rawCourses;
 
 var requirement = {
 	it: 9,
-	business: 0,
+	business: 9,
 	english: 0,
 	skill: 0,
 	family: 0,
 	health: 0,
-	art: 0,
+	art: 3,
 	office: 0
 }
 
 
-Recommender.getAdvanceRecommendations(1, requirement, function(err, message){
-
-});
-return;
 Recommender.getRecommendations(requirement, function(err, message){
 	console.log(err);
 	console.log(message);
