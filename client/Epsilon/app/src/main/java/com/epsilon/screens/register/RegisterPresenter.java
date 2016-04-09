@@ -20,7 +20,7 @@ public class RegisterPresenter implements RegisterContract.UserActionListener {
 
     @Override
     public void completeBasic(String username, String password) {
-        if (TextUtils.isEmpty(username) || !Validator.isNameValid(username)) {
+        if (TextUtils.isEmpty(username) || !Validator.isUsernameValid(username)) {
             mRegisterView.displayErrorUsername();
             return;
         }

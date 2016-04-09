@@ -12,4 +12,5 @@
     <string name="login_text">Đăng nhập</string>
     <string name="go_to_register">Chưa có tài khoản ? Đăng kí</string>
     <string name="next">Tiếp tục</string>
+    <string name="complete_register">Hoàn tất</string>
 </resources>
