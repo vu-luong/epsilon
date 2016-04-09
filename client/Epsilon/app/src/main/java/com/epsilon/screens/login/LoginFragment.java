@@ -42,7 +42,7 @@ public class LoginFragment extends GenericRetainedFragment implements LoginContr
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mUserActionListener = new LoginPresenter();
+        mUserActionListener = new LoginPresenter(this);
 
     }
 
