@@ -36,6 +36,9 @@ router.post('/',
 // log in
 router.post('/sessions',
 	function(req, res){
+		console.log('Login request:');
+		console.log(req.body);
+		console.log('--------------');
 		var username = req.body.username;
 		var password = req.body.password;
 		Learners.findByUsername(req.body.username, function(err, message){
