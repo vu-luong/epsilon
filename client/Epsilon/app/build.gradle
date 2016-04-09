@@ -48,6 +48,7 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
     compile 'com.github.igortrncic.dotted-progress-bar:library:1.0.0'
     compile 'com.bartoszlipinski:recyclerviewheader2:2.0.0'
+    compile 'com.github.qiujuer:genius:2.4.1'
 
 
     // App's dependencies, including test
