@@ -6,7 +6,6 @@
     android:orientation="vertical"
     android:paddingLeft="24dp"
     android:paddingRight="24dp"
-    android:paddingTop="50dp"
     android:scrollbars="none">
 
 
@@ -15,12 +14,25 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="Vui lòng chọn mức độ quan tâm \n     của bạn đến từng lĩnh vực"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"/>
+
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingTop="8dp"
-            android:paddingBottom="@dimen/linear_bottom_margin">
+            android:paddingBottom="@dimen/linear_bottom_margin"
+            android:layout_marginTop="20dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -32,6 +44,8 @@
                 android:id="@+id/seekBar1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
                 genius:g_allowTrackClickToDrag="false"
                 genius:g_indicatorBackgroundColor="#0cb45a"
                 genius:g_indicatorFormatter="%d"
@@ -50,6 +64,23 @@
                 genius:g_trackStroke="4dp"
                 genius:g_value="3"
                 android:layout_marginTop="16dp"/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="9sp"
+                    android:text="  Không \nquan tâm"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="9sp"
+                    android:text="  Cực kì \nquan tâm"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
 
         </LinearLayout>
         <View
@@ -92,6 +123,23 @@
                 genius:g_value="3"
                 android:layout_marginTop="16dp"/>
 
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="9sp"
+                    android:text="  Không \nquan tâm"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="9sp"
+                    android:text="  Cực kì \nquan tâm"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
+
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -132,6 +180,23 @@
                 genius:g_trackStroke="4dp"
                 genius:g_value="3"
                 android:layout_marginTop="16dp"/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="9sp"
+                    android:text="  Không \nquan tâm"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="9sp"
+                    android:text="  Cực kì \nquan tâm"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
 
         </LinearLayout>
         <View
@@ -174,6 +239,23 @@
                 genius:g_value="3"
                 android:layout_marginTop="16dp"/>
 
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="9sp"
+                    android:text="  Không \nquan tâm"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="9sp"
+                    android:text="  Cực kì \nquan tâm"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
+
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -214,6 +296,23 @@
                 genius:g_trackStroke="4dp"
                 genius:g_value="3"
                 android:layout_marginTop="16dp"/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="9sp"
+                    android:text="  Không \nquan tâm"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="9sp"
+                    android:text="  Cực kì \nquan tâm"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
 
         </LinearLayout>
         <View
@@ -256,6 +355,23 @@
                 genius:g_value="3"
                 android:layout_marginTop="16dp"/>
 
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="9sp"
+                    android:text="  Không \nquan tâm"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="9sp"
+                    android:text="  Cực kì \nquan tâm"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
+
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -297,6 +413,23 @@
                 genius:g_value="3"
                 android:layout_marginTop="16dp"/>
 
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="9sp"
+                    android:text="  Không \nquan tâm"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="9sp"
+                    android:text="  Cực kì \nquan tâm"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
+
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -337,6 +470,23 @@
                 genius:g_trackStroke="4dp"
                 genius:g_value="3"
                 android:layout_marginTop="16dp"/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="9sp"
+                    android:text="  Không \nquan tâm"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="9sp"
+                    android:text="  Cực kì \nquan tâm"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
 
         </LinearLayout>
 
