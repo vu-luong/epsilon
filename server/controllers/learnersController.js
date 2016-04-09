@@ -132,9 +132,23 @@ router.delete('/sessions', function(req, res){
 	});
 });
 
-router('/:id/recommendations', function(req, res){
+router.get('/:id/recommendations', function(req, res){
 	var id = req.params.id;
-	
+	Learners.getRecommendations(id, function(err, message){
+		if (err){
+			console.log('Error when get recommendations');
+			console.log(err);
+			res.json({
+				status: 'error',
+				error: "Lỗi không xác định"
+			});
+		} else {
+			res.json({
+				status: 'success',
+				message: message
+			});
+		}
+	});
 });
 
 
