@@ -31,17 +31,19 @@ public class LoginPresenter implements LoginContract.UserActionListener{
             return;
         }
 
-
+        mView.showProcessingIndicator(true);
         // TODO - send request login
         mUserRepository.login(username, password, new UserRepository.LoginResultCallBack() {
             @Override
             public void onSucceed() {
+                mView.showProcessingIndicator(false);
                 mView.displayLoginSucceed();
                 mView.goToMainScreen();
             }
 
             @Override
             public void onError(String message) {
+                mView.showProcessingIndicator(false);
                 mView.displayLoginError(message);
             }
         });

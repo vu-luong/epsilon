@@ -14,6 +14,7 @@ public interface CategoryDetailContract {
     interface View extends GenericViewInterface {
         void displayAllCoursesOfCategory(List<Course> list);
         void goToCourseDetailScreen(int position);
+        void displayNetworkError(String error);
 
     }
 

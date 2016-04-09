@@ -13,6 +13,7 @@
         android:orientation="vertical">
 
         <ImageView
+            android:id="@+id/item_imgv_course_thumbnail"
             android:layout_width="match_parent"
             android:src="@drawable/thamduong"
             android:scaleType="centerCrop"
@@ -25,7 +26,7 @@
             android:padding="12dp"
             android:layout_height="match_parent">
             <TextView
-                android:id="@+id/item_course_name"
+                android:id="@+id/item_tv_course_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
@@ -35,6 +36,7 @@
                 />
 
             <TextView
+                android:id="@+id/item_tv_teacher_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
@@ -42,7 +44,7 @@
 
 
             <RatingBar
-                android:id="@+id/ratingBar1"
+                android:id="@+id/item_tv_ratingbar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/customRatingBar"
@@ -57,16 +59,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp">
                 <TextView
+                    android:id="@+id/item_tv_price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:text="499,000đ"
-                    android:layout_alignParentLeft="true"/>
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentBottom="true"/>
 
                 <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="16dp"
+                    android:id="@+id/item_imgv_provider"
+                    android:layout_width="60dp"
+                    android:layout_height="12dp"
                     android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
                     android:src="@drawable/icon_edumall"/>
 
             </RelativeLayout>

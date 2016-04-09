@@ -2,6 +2,8 @@ package utils;
 
 import com.epsilon.models.category.CategoryRepository;
 import com.epsilon.models.category.CategoryRepositoryApiImpl;
+import com.epsilon.models.course.CourseRepository;
+import com.epsilon.models.course.CourseRepositoryApiImpl;
 import com.epsilon.models.user.UserRepository;
 import com.epsilon.models.user.UserRepositoryApiImpl;
 
@@ -16,5 +18,9 @@ public class Injection {
 
     public static CategoryRepository provideCategoryRepository() {
         return CategoryRepositoryApiImpl.getInstance();
+    }
+
+    public static CourseRepositoryApiImpl provideCourseRepository() {
+        return CourseRepositoryApiImpl.getInstance();
     }
 }

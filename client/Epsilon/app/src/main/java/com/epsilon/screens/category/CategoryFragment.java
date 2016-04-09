@@ -1,5 +1,6 @@
 package com.epsilon.screens.category;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -14,6 +15,7 @@ import com.epsilon.R;
 import com.epsilon.commons.GenericRetainedFragment;
 import com.epsilon.customview.GridSpacingItemDecoration;
 import com.epsilon.models.entities.Category;
+import com.epsilon.screens.categorydetail.CategoryDetailActivity;
 
 import java.util.List;
 
@@ -23,7 +25,7 @@ import utils.Injection;
 /**
  * Created by Dandoh on 4/9/16.
  */
-public class CategoryFragment extends GenericRetainedFragment implements CategoryContract.View{
+public class CategoryFragment extends GenericRetainedFragment implements CategoryContract.View, CategoryListAdapter.OnCategoryItemClick {
 
     @Bind(R.id.discover_recycle_view)
     RecyclerView mRecyclerView;
@@ -65,7 +67,7 @@ public class CategoryFragment extends GenericRetainedFragment implements Categor
 
         mHeader.attachTo(mRecyclerView);
 
-        mAdapter = new CategoryListAdapter(getActivity());
+        mAdapter = new CategoryListAdapter(getActivity(), this);
         mRecyclerView.setAdapter(mAdapter);
 
         int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.spacing);
@@ -79,11 +81,17 @@ public class CategoryFragment extends GenericRetainedFragment implements Categor
 
     @Override
     public void goToCategoryCoursesScreen(int categoryId) {
-
+        Intent intent = CategoryDetailActivity.makeIntent(getActivity(), categoryId);
+        startActivity(intent);
     }
 
     @Override
     public void onError(String errorMessage) {
         Toast.makeText(getActivity(), errorMessage + "", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClick(int position, Category category) {
+        mUserActionListener.viewCoursesOfCategory(category.getId());
     }
 }

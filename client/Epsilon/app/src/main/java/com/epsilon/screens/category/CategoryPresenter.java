@@ -37,6 +37,6 @@ public class CategoryPresenter implements CategoryContract.UserActionListener{
 
     @Override
     public void viewCoursesOfCategory(int categoryId) {
-
+        mCategoryView.goToCategoryCoursesScreen(categoryId);
     }
 }

@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.epsilon.R;
 import com.epsilon.commons.GenericRetainedFragment;
+import com.epsilon.screens.main.MainActivity;
 import com.epsilon.screens.register.RegisterActivity;
 import com.epsilon.utils.Utils;
 
@@ -105,5 +106,7 @@ public class LoginFragment extends GenericRetainedFragment implements LoginContr
     @Override
     public void goToMainScreen() {
         // TODO
+        Intent intent = MainActivity.makeIntent(getActivity(), MainActivity.COURSES_TAB_POSITION);
+        startActivity(intent);
     }
 }
