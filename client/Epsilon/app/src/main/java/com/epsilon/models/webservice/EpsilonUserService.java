@@ -12,7 +12,7 @@ import retrofit2.http.POST;
  */
 public interface EpsilonUserService {
 
-    @POST("/learners")
+    @POST("/learners/sessions")
     Call<LoginResultJSON> login(@Body LoginRequestJSON loginRequestJSON);
 
 }
