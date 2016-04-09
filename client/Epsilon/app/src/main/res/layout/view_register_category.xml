@@ -45,8 +45,6 @@
                 android:id="@+id/seekBar1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
                 genius:g_allowTrackClickToDrag="false"
                 genius:g_indicatorBackgroundColor="#0cb45a"
                 genius:g_indicatorFormatter="%d"

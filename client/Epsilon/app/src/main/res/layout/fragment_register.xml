@@ -13,14 +13,16 @@
         android:layout_below="@+id/actionBar">
 
         <include
-            layout="@layout/view_register_basic"
+            layout="@layout/view_register_category"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
         <include
-            layout="@layout/view_register_category"
+            layout="@layout/view_register_basic"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+
+
 
     </ViewAnimator>
 

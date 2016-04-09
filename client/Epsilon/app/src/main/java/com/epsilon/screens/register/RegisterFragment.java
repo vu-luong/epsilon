@@ -1,11 +1,14 @@
 package com.epsilon.screens.register;
 
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -100,6 +103,16 @@ public class RegisterFragment extends GenericRetainedToolbarFragment implements 
         }
 
         setUpSignUpWizardView();
+        setUpSeekBars();
+    }
+
+    private void setUpSeekBars() {
+        CustomSeekBarOnTouchListener listener = new CustomSeekBarOnTouchListener();
+        mSeekBar1.setOnTouchListener(listener);
+        mSeekBar2.setOnTouchListener(listener);
+        mSeekBar3.setOnTouchListener(listener);
+        mSeekBar4.setOnTouchListener(listener);
+        mSeekBar5.setOnTouchListener(listener);
     }
 
     void setUpSignUpWizardView() {
@@ -193,5 +206,45 @@ public class RegisterFragment extends GenericRetainedToolbarFragment implements 
     @Override
     public void displayRegisterError(String errorMessage) {
         Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
+    }
+
+    public static class CustomSeekBarOnTouchListener implements View.OnTouchListener {
+
+        private final float mNumOfLevel = 5.0f;
+        private String TAG = "CustomSeekBarOnTouchListener";
+
+
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+
+            Utils.log(TAG, "calling this");
+
+            int levelToGo = getLevelToGo(v.getWidth(), event.getX());
+            Utils.log(TAG, levelToGo + " ");
+            if (levelToGo > 0) {
+                ((GeniusSeekBar) v).setProgress(levelToGo);
+            }
+            return false;
+        }
+
+        private int getLevelToGo(float maxWidth, float x) {
+
+            Utils.log(TAG, "maxWidthd = " + maxWidth);
+            Utils.log(TAG, "x = " + x);
+
+            for (int i = 1; i <= mNumOfLevel; i++) {
+                float xi = (maxWidth / (mNumOfLevel - 1)) * (i - 1);
+                Utils.log(TAG, "x" + i + " " + xi);
+
+                if (x >= xi - 1/(2 * mNumOfLevel) * maxWidth
+                        && x <= xi + 1/(2 * mNumOfLevel) * maxWidth) {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+
+
     }
 }
