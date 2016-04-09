@@ -129,6 +129,56 @@ Recommender.getAdvanceRecommendations = function (learner_id, requirement, cb){
 	});
 }
 
+Recommender.getSimilarCourses = function (id, category, cb){
+	Courses.getAllCourses(function(err, message){
+		if (err){
+			cb(err, null);
+		} else {
+			rawCourses = message;
+			var courseHasID = {};
+			// build tree
+			var courses = [];
+			for (var i = 0; i < rawCourses.length; i++){
+				if (rawCourses[i].id == id) continue;
+				courses.push({
+					id: rawCourses[i].id,
+					it: parseInt(rawCourses[i].category.charAt(0)),
+					business: parseInt(rawCourses[i].category.charAt(1)),
+					english: parseInt(rawCourses[i].category.charAt(2)),
+					skill: parseInt(rawCourses[i].category.charAt(3)),
+					family: parseInt(rawCourses[i].category.charAt(4)),
+					health: parseInt(rawCourses[i].category.charAt(5)),
+					art: parseInt(rawCourses[i].category.charAt(6)),
+					office: parseInt(rawCourses[i].category.charAt(7))
+				});
+				courseHasID[rawCourses[i].id] = rawCourses[i];
+			}
+			var options = {
+			  k: RETURNED_RECOMMENDATIONS, 
+			  debug: false,
+			  standardize: false
+			}
+			var requirement = {
+				it: parseInt(category.charAt(0)),
+				business: parseInt(category.charAt(1)),
+				english: parseInt(category.charAt(2)),
+				skill: parseInt(category.charAt(3)),
+				family: parseInt(category.charAt(4)),
+				health: parseInt(category.charAt(5)),
+				art: parseInt(category.charAt(6)),
+				office: parseInt(category.charAt(7))
+			}
+
+			var knn = alike(requirement, courses, options);
+			var res = [];
+			for (var i = 0; i < knn.length; i++){
+				res.push(courseHasID[knn[i].id]);
+			}
+			cb(null, res);
+		}
+	});
+}
+
 
 
 module.exports = Recommender;
