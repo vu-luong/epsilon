@@ -38,9 +38,9 @@ router.post('/',
 			password: req.body.password,
 			requirement_category: req.body.requirement_category
 		}, function(err, message){
-			console.log("Error when add learner");
-			console.log(err);		
 			if (err) {
+				console.log("Error when add learner");
+				console.log(err);			
 				res.json({
 					status: "error",
 					error: "Lỗi không xác định"
@@ -50,6 +50,7 @@ router.post('/',
 					status: "success",
 					message: message
 				});
+				var tree = Learners.calRequirementRcms(req.body.requirement_category);
 			}
 		});
 	}
@@ -123,12 +124,17 @@ router.delete('/sessions', function(req, res){
 			} else {
 				res.json({
 					status: 'error',
-					error: 'id người dùng sai'
+					error: 'Id người dùng sai'
 				});
 			}
 			
 		}
 	});
+});
+
+router('/:id/recommendations', function(req, res){
+	var id = req.params.id;
+	
 });
 
 

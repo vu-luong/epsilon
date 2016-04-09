@@ -1,7 +1,26 @@
 var Courses = require('../models/courses');
 var alike = require('alike');
+var Recommender = require('../utils/recommendEngine');
 
 var rawCourses;
+
+var requirement = {
+	it: 9,
+	business: 0,
+	english: 0,
+	skill: 0,
+	family: 0,
+	health: 0,
+	art: 0,
+	office: 0
+}
+
+Recommender.getRecommendations(requirement, function(err, message){
+	console.log(err);
+	console.log(message);
+});
+return;
+//
 Courses.getAllCourses(function(err, message){
 	if (err){
 		console.log(err);
@@ -36,7 +55,7 @@ Courses.getAllCourses(function(err, message){
 		var requirement9 = {
 			it: 9,
 			business: 9,
-			english: 9,
+			english: 0,
 			skill: 9,
 			family: 9,
 			health: 9,
@@ -56,12 +75,12 @@ Courses.getAllCourses(function(err, message){
 		}
 
 		var options = {
-		  k: 5,
+		  k: 15,
 		  debug: false,
 		  standardize: false
 		}
 
-		var res = alike(requirement5, courses, options);
+		var res = alike(requirement9, courses, options);
 		console.log("Top " + options.k + " courses for you:");
 		var course;
 		for (var i = 0; i < res.length; i++){
