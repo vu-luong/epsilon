@@ -15,6 +15,11 @@ var requirement = {
 	office: 0
 }
 
+
+Recommender.getAdvanceRecommendations(1, requirement, function(err, message){
+
+});
+return;
 Recommender.getRecommendations(requirement, function(err, message){
 	console.log(err);
 	console.log(message);
