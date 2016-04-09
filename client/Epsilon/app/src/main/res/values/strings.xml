@@ -15,4 +15,28 @@
     <string name="complete_register">Hoàn tất</string>
     <string name="slogan_title">Học gì cũng có</string>
     <string name="slogan_content">Từ những chuyên gia nổi tiếng hàng đầu Việt Nam trong mọi lĩnh vực</string>
+
+    <string-array name="category_colors">
+        <item>#EDD7C7</item>
+        <item>#DBD2C8</item>
+        <item>#C0C4C8</item>
+        <item>#CCC5D5</item>
+        <item>#CDE8DA</item>
+        <item>#D6CEC3</item>
+        <item>#F2E6B5</item>
+        <item>#C1D3E5</item>
+    </string-array>
+
+    <string-array name="category_names">
+        <item>Công nghệ thông tin</item>
+        <item>Kinh doanh - Việc làm</item>
+        <item>Ngoại ngữ</item>
+        <item>Kỹ năng mềm</item>
+        <item>Gia đình</item>
+        <item>Sức khỏe</item>
+        <item>Nghệ thuật - Thiết kế</item>
+        <item>Ứng dụng văn phòng</item>
+        <item>Đăng nhập</item>
+    </string-array>
+
 </resources>

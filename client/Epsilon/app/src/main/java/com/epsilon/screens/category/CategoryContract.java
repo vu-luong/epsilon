@@ -13,6 +13,7 @@ public interface CategoryContract {
     interface View extends GenericViewInterface{
         void displayAllCategory(List<Category> categories);
         void goToCategoryCoursesScreen(int categoryId);
+        void onError(String errorMessage);
     }
 
     interface UserActionListener {

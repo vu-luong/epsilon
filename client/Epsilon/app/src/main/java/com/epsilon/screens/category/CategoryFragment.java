@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
 import com.epsilon.R;
@@ -17,6 +18,7 @@ import com.epsilon.models.entities.Category;
 import java.util.List;
 
 import butterknife.Bind;
+import utils.Injection;
 
 /**
  * Created by Dandoh on 4/9/16.
@@ -32,9 +34,12 @@ public class CategoryFragment extends GenericRetainedFragment implements Categor
     private CategoryListAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
+    private CategoryContract.UserActionListener mUserActionListener;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mUserActionListener = new CategoryPresenter(this, Injection.provideCategoryRepository());
     }
 
     @Nullable
@@ -47,6 +52,12 @@ public class CategoryFragment extends GenericRetainedFragment implements Categor
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        setUpCategoryList();
+        mUserActionListener.getAllCategory();
+
+    }
+
+    private void setUpCategoryList() {
         int numOfColumn = getResources().getInteger(R.integer.numOfColumn);
 
         mLayoutManager = new GridLayoutManager(getActivity(), numOfColumn);
@@ -54,7 +65,7 @@ public class CategoryFragment extends GenericRetainedFragment implements Categor
 
         mHeader.attachTo(mRecyclerView);
 
-        mAdapter = new CategoryListAdapter();
+        mAdapter = new CategoryListAdapter(getActivity());
         mRecyclerView.setAdapter(mAdapter);
 
         int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.spacing);
@@ -69,5 +80,10 @@ public class CategoryFragment extends GenericRetainedFragment implements Categor
     @Override
     public void goToCategoryCoursesScreen(int categoryId) {
 
+    }
+
+    @Override
+    public void onError(String errorMessage) {
+        Toast.makeText(getActivity(), errorMessage + "", Toast.LENGTH_SHORT).show();
     }
 }

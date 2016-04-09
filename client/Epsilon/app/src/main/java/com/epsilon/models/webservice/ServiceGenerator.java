@@ -99,7 +99,7 @@ public class ServiceGenerator {
                         Request modifiedRequest = request.newBuilder()
                                 // TODO - add authorization
 //                                .addHeader("token", getAccessToken())
-                                .addHeader("Authorization", authToken)
+                                .addHeader("id", 1 + "")
                                 .build();
                         return chain.proceed(modifiedRequest);
                     }
