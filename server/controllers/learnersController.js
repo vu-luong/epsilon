@@ -184,4 +184,23 @@ router.post('/enroll', function(req, res){
 	});
 });
 
+
+router.get('/:id/history', function(req, res){
+	var id = req.params.id;
+	Learners.getHistory(id, function(err, message){
+		if (err){
+			console.log('Error when get history');
+			console.log(err);
+			res.json({
+				status: 'error',
+				error: "Lỗi không xác định"
+			});
+		} else {
+			res.json({
+				status: 'success',
+				message: message
+			});
+		}
+	});
+});
 module.exports = router;
