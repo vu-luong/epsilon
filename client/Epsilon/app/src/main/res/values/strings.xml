@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Epsilon</string>
+    <string name="network_error_string">Network connection error</string>
 </resources>
