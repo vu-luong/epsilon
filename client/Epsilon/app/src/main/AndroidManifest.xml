@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:name=".EpsilonApplication"
-        android:theme="@style/AppTheme.Dark">
+        android:theme="@style/AppTheme">
         <activity android:name=".screens.main.MainActivity">
         </activity>
 
@@ -24,7 +24,8 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".screens.register.RegisterActivity">
+        <activity android:name=".screens.register.RegisterActivity"
+            android:theme="@style/AppTheme.Dark">
 
         </activity>
     </application>
