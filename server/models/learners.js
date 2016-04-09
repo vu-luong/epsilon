@@ -1,6 +1,7 @@
 var db = require('./db');
 var Learners = {};
 var Recommender = require('../utils/recommendEngine');
+var Courses = require('../models/courses');
 
 Learners.checkValidUsername = function(username, cb){
 	db.query('SELECT * FROM learners WHERE username = ?', username, function(err, message){
@@ -42,8 +43,9 @@ Learners.calRequirementRcms = function(category, cb){
 			cb(err, message);
 		});
 	} else {
-		// TODO get top 5 courses
-		cb(err, null);
+		Courses.getTop(function(err, message){
+			cb(err, message);
+		});
 	}
 }
 
@@ -58,7 +60,7 @@ Learners.getRecommendations = function(id, cb){
 			});
 		}
 	});
-};
+}
 
 Learners.findByUsername = function(username, cb){
 	db.query('SELECT * FROM learners WHERE username = ?', username, function(err, message){
@@ -85,6 +87,5 @@ Learners.logout = function(id, cb){
 	        	cb(err, message);
 	    });
 }
-
 
 module.exports = Learners;
