@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -35,7 +36,7 @@ import utils.Injection;
 public class CourseDetailFragment extends GenericRetainedToolbarFragment
         implements CourseDetailContract.View, CourseListAdapter.OnCourseItemClick{
 
-    private static final String COURSE_ID = "course id";
+    private static final String COURSE_ID_KEY = "course id";
     private CourseDetailContract.UserActionListener mUserActionListener;
     private HorizontalCourseListAdapter mCourseListAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -57,7 +58,7 @@ public class CourseDetailFragment extends GenericRetainedToolbarFragment
 
     public static Fragment getInstance(int courseId) {
         Bundle bundle = new Bundle();
-        bundle.putInt(COURSE_ID, courseId);
+        bundle.putInt(COURSE_ID_KEY, courseId);
 
         Fragment fragment = new CourseDetailFragment();
         fragment.setArguments(bundle);
@@ -84,6 +85,8 @@ public class CourseDetailFragment extends GenericRetainedToolbarFragment
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setUpList();
+
+        mUserActionListener.getCourseDetailById(getArguments().getInt(COURSE_ID_KEY));
     }
 
     private void setUpList() {
@@ -130,5 +133,15 @@ public class CourseDetailFragment extends GenericRetainedToolbarFragment
     @Override
     public void onClick(int position, Course course) {
         //TODO
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            getActivity().onBackPressed();
+            return true;
+        }
+
+        return false;
     }
 }

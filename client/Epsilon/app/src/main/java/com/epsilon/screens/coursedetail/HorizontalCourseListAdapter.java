@@ -32,4 +32,5 @@ public class HorizontalCourseListAdapter extends CourseListAdapter {
         ViewHolder vh = new ViewHolder(v);
         return vh;
     }
+
 }

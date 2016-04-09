@@ -22,7 +22,7 @@ public interface EpsilonMainService {
     @GET("/courses/{id}")
     Call<CourseResultJSON> getCourseById(@Path("id") int id);
 
-    @GET("/course/{id}/recommends")
+    @GET("/courses/{id}/recommends")
     Call<CoursesListResultJSON> getRecommendedCourseWhenOpeningCourse(@Path("id") int courseId);
 
 }

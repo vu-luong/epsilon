@@ -3,6 +3,8 @@ package com.epsilon.screens.coursedetail;
 import com.epsilon.models.course.CourseRepository;
 import com.epsilon.models.entities.Course;
 
+import java.util.List;
+
 /**
  * Created by AnhVu on 4/9/16.
  */
@@ -45,7 +47,18 @@ public class CourseDetailPresenter implements CourseDetailContract.UserActionLis
 
     @Override
     public void getRecommendedCourse(int courseId) {
+        mCourseRepository.getRecommendedCourseWhenOpeningCourse(courseId,
+                new CourseRepository.CoursesListResultCallBack() {
+                    @Override
+                    public void onSucceed(List<Course> courses) {
+                        mView.displayRecommendedCourse(courses);
+                    }
 
+                    @Override
+                    public void onError(String errorMessage) {
+                        mView.onError(errorMessage);
+                    }
+                });
 
     }
 }

@@ -22,6 +22,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity android:name=".screens.register.RegisterActivity"
             android:theme="@style/AppTheme.Dark">
@@ -30,6 +31,10 @@
 
         <activity android:name=".screens.categorydetail.CategoryDetailActivity">
 
+
+        </activity>
+
+        <activity android:name=".screens.coursedetail.CourseDetailActivity">
 
         </activity>
 
