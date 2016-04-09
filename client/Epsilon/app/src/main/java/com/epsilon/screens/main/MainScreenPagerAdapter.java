@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.epsilon.screens.category.CategoryFragment;
 import com.epsilon.screens.courses.CoursesFragment;
+import com.epsilon.screens.recommend.RecommendFragment;
 
 
 public class MainScreenPagerAdapter extends FragmentPagerAdapter {
@@ -37,11 +38,8 @@ public class MainScreenPagerAdapter extends FragmentPagerAdapter {
         } else if (position == 1) {
             return new CategoryFragment();
         } else if (position == 2) {
-
-            // TODO
-            return new CategoryFragment();
+            return new RecommendFragment();
         }
-
         return null;
     }
 

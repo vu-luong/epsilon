@@ -42,6 +42,7 @@ public class CategoryFragment extends GenericRetainedFragment implements Categor
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mUserActionListener = new CategoryPresenter(this, Injection.provideCategoryRepository());
+        mUserActionListener.getAllCategory();
     }
 
     @Nullable
@@ -55,7 +56,7 @@ public class CategoryFragment extends GenericRetainedFragment implements Categor
         super.onViewCreated(view, savedInstanceState);
 
         setUpCategoryList();
-        mUserActionListener.getAllCategory();
+
 
     }
 

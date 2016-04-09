@@ -77,6 +77,8 @@ public class ServiceGenerator {
         SharedPreferences sharedPreferences = Utils.getSharedPreferences();
         final int userId = sharedPreferences.getInt(Constants.ID_TAG, -1);
 
+        Utils.log(TAG, "User id : " + userId);
+
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(new Interceptor() {
                     @Override

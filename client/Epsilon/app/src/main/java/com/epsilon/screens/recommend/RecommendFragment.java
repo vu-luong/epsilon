@@ -1,4 +1,4 @@
-package com.epsilon.screens.courses;
+package com.epsilon.screens.recommend;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,18 +22,16 @@ import java.util.List;
 import butterknife.Bind;
 import utils.Injection;
 
-
 /**
  * Created by AnhVu on 4/10/16.
  */
-public class CoursesFragment extends GenericRetainedFragment implements CoursesContract.View, CourseListAdapter.OnCourseItemClick {
+public class RecommendFragment extends GenericRetainedFragment
+        implements RecommendContract.View, CourseListAdapter.OnCourseItemClick {
 
-    private CoursesContract.UserActionListener mUserActionListener;
-
+    private RecommendContract.UserActionListener mUserActionListener;
     private CourseListAdapter mCourseListAdapter;
 
-
-    @Bind(R.id.courses_recycle_view)
+    @Bind(R.id.recommend_recycle_view)
     RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
 
@@ -42,14 +40,14 @@ public class CoursesFragment extends GenericRetainedFragment implements CoursesC
         super.onCreate(savedInstanceState);
 
         mCourseListAdapter = new CourseListAdapter(this);
-        mUserActionListener = new CoursesPresenter(this, Injection.provideCourseRepository());
-        mUserActionListener.getMyCourses();
+        mUserActionListener = new RecommendPresenter(this, Injection.provideCourseRepository());
+        mUserActionListener.getRecommendCourses();
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_courses, container, false);
+        return inflater.inflate(R.layout.fragment_recommend, container, false);
     }
 
     @Override
@@ -60,6 +58,7 @@ public class CoursesFragment extends GenericRetainedFragment implements CoursesC
     }
 
     private void setUpList() {
+
         int numOfColumn = getResources().getInteger(R.integer.numOfColumn);
 
         mLayoutManager = new GridLayoutManager(getActivity(), numOfColumn);
@@ -67,10 +66,11 @@ public class CoursesFragment extends GenericRetainedFragment implements CoursesC
         mRecyclerView.setAdapter(mCourseListAdapter);
         int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.spacing);
         mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(numOfColumn, spacingInPixels, true));
+
     }
 
     @Override
-    public void displayMyCourse(List<Course> courses) {
+    public void displayRecommendCourse(List<Course> courses) {
         mCourseListAdapter.setCourses(courses);
     }
 
@@ -84,7 +84,6 @@ public class CoursesFragment extends GenericRetainedFragment implements CoursesC
     public void onError(String error) {
         Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
     }
-
 
     @Override
     public void onClick(int position, Course course) {

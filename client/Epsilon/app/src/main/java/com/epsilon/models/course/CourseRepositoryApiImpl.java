@@ -100,4 +100,20 @@ public class CourseRepositoryApiImpl implements CourseRepository {
                     }
                 });
     }
+
+    @Override
+    public void getRecommendedCourseByHistory(final CoursesListResultCallBack callBack) {
+        ServiceGenerator.getEpsilonWebService().getRecommendedCourseByHistory()
+                .enqueue(new GenericRetrofitCallback<CoursesListResultJSON>() {
+                    @Override
+                    protected void onSucceed(CoursesListResultJSON result) {
+                        callBack.onSucceed(result.getMessage());
+                    }
+
+                    @Override
+                    protected void onError(String message) {
+                        callBack.onError(message);
+                    }
+                });
+    }
 }
