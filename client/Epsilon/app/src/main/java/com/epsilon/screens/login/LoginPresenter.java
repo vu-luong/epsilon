@@ -2,6 +2,7 @@ package com.epsilon.screens.login;
 
 import android.text.TextUtils;
 
+import com.epsilon.models.user.UserRepository;
 import com.epsilon.utils.Validator;
 
 /**
@@ -10,9 +11,11 @@ import com.epsilon.utils.Validator;
 public class LoginPresenter implements LoginContract.UserActionListener{
 
     private LoginContract.View mView;
+    private UserRepository mUserRepository;
 
-    public LoginPresenter(LoginContract.View mView) {
+    public LoginPresenter(LoginContract.View mView, UserRepository mUserRepository) {
         this.mView = mView;
+        this.mUserRepository = mUserRepository;
     }
 
     @Override
@@ -30,9 +33,20 @@ public class LoginPresenter implements LoginContract.UserActionListener{
 
 
         // TODO - send request login
+        mUserRepository.login(username, password, new UserRepository.LoginResultCallBack() {
+            @Override
+            public void onSucceed() {
+                mView.displayLoginSucceed();
+                mView.goToMainScreen();
+            }
 
-        mView.displayLoginSucceed();
-        mView.goToMainScreen();
+            @Override
+            public void onError(String message) {
+                mView.displayLoginError(message);
+            }
+        });
+
+
     }
 
     @Override

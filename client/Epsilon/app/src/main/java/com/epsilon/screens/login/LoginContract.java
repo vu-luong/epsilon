@@ -13,6 +13,7 @@ public interface LoginContract {
         void displayErrorPassword();
         void goToRegisterScreen();
         void displayLoginSucceed();
+        void displayLoginError(String message);
         void goToMainScreen();
     }
 

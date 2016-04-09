@@ -15,7 +15,7 @@ public class LoginResultJSON extends GenericResultJSON {
         this.message = message;
     }
 
-    class Message {
+    public static class Message {
         int insertId;
 
         public int getInsertId() {
