@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Epsilon</string>
+    <string name="network_error_string">Network connection error</string>
+    <string name="category1">Công nghệ thông tin</string>
+    <string name="category2">Kinh doanh - Việc làm</string>
+    <string name="category3">Ngoại ngữ</string>
+    <string name="category4">Kỹ năng mềm</string>
+    <string name="category5">Gia đình</string>
+    <string name="category6">Sức khỏe</string>
+    <string name="category7">Nghệ thuật - Thiết kế</string>
+    <string name="category8">Ứng dụng văn phòng</string>
 </resources>
