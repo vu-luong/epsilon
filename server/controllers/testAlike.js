@@ -24,11 +24,11 @@ Courses.getAllCourses(function(err, message){
 		}
 		var requirement = {
 			it: 0,
-			business: 0,
-			english: 5,
+			business: 9,
+			english: 9,
 			skill: 0,
 			family: 0,
-			health: 6,
+			health: 0,
 			art: 0,
 			office: 0
 		}
