@@ -7,8 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.epsilon.R;
 import com.epsilon.commons.GenericRetainedToolbarFragment;
 import com.epsilon.models.entities.Course;
+
+import utils.Injection;
 
 
 /**
@@ -17,6 +20,7 @@ import com.epsilon.models.entities.Course;
 public class CourseDetailFragment extends GenericRetainedToolbarFragment implements CourseDetailContract.View{
 
     private static final String COURSE_ID = "course id";
+    private CourseDetailContract.UserActionListener mUserActionListener;
 
     public static Fragment getInstance(int courseId) {
         Bundle bundle = new Bundle();
@@ -31,13 +35,13 @@ public class CourseDetailFragment extends GenericRetainedToolbarFragment impleme
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mUserActionListener = new CourseDetailPresenter(this, Injection.provideCourseRepository());
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //TODO
-        return null;
+        return inflater.inflate(R.layout.fragment_course_detail, container, false);
     }
 
     @Override

@@ -17,6 +17,8 @@
     <string name="slogan_content">Từ những chuyên gia nổi tiếng hàng đầu Việt Nam trong mọi lĩnh vực</string>
     <string name="free">Miễn phí</string>
     <string name="premium">Premium</string>
+    <string name="enroll">ĐẾN KHÓA HỌC</string>
+    <string name="course_overview_demo">Trong báo cáo tháng 1/2016 của State of Mobile App Developers, kết quả cho thấy: Có đến 86% lập trình viên được hỏi đã viết ứng dụng cho Android, 56% viết cho iOS. Mức thu nhập của lập trình viên Android vào khoảng 4.900 USD/tháng nhưng các \\\"đồng nghiệp\\\" bên IOS lại thu nhập 8.100 USD/th</string>
 
     <string-array name="category_colors">
         <item>#EDD7C7</item>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="?attr/actionBarSize">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/coursedetail_iv_thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/angular"
+                android:focusableInTouchMode="true"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:padding="16dp"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/coursedetail_tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:textColor="#4F4F4F"
+                    android:textSize="16sp"
+                    android:text="Thành thạo photoshop trong 7 ngày"
+                    android:ellipsize="end"
+                    />
+
+                <TextView
+                    android:id="@+id/coursedetail_tv_author"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="4dp"
+                    android:layout_height="wrap_content"
+                    android:text="Phạm Quang Huy"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <RatingBar
+                        android:id="@+id/coursedetail_ratingbar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/customRatingBar"
+                        android:rating="3"
+                        android:paddingTop="4dp"
+                        android:clickable="false"
+                        android:isIndicator="true"
+                        android:stepSize="0.25"/>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="#979797" />
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:textColor="#4F4F4F"
+                    android:textSize="16sp"
+                    android:text="Mô tả về khóa học"/>
+
+                <TextView
+                    android:id="@+id/coursedetail_tv_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="3"
+                    android:layout_marginTop="4dp"
+                    android:ellipsize="end"
+                    android:text="@string/course_overview_demo"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="#979797" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#4F4F4F"
+                    android:textSize="16sp"
+                    android:layout_marginTop="16dp"
+                    android:text="Khoá học có thể bạn quan tâm"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/coursedetail_recycleview_recommend"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </android.support.v7.widget.RecyclerView>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/actionBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways" />
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/coursedetail_btn_gotocourse"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/colored_button"
+        android:padding="12dp"
+        android:textColor="@android:color/white"
+        android:text="@string/enroll"
+        android:layout_alignParentBottom="true"/>
+
+
+</RelativeLayout>
+
