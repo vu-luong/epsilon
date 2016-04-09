@@ -5,5 +5,5 @@ package com.epsilon.utils;
  */
 public class Constants {
     public static final String TOKEN_TAG = "token tag";
-    public static final String API_BASE_URL = "";
+    public static final String API_BASE_URL = "http://192.168.43.4:3000";
 }

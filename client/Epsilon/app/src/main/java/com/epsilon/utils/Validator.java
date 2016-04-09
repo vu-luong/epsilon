@@ -38,8 +38,8 @@ public class Validator {
     }
 
 
-    private static final String PASSWORD_PATTERN = "^[a-z0-9]{6,15}$";
-    private static Pattern passwordPattern = Pattern.compile(USERNAME_PATTERN);
+    private static final String PASSWORD_PATTERN = "^[a-z0-9]{4,15}$";
+    private static Pattern passwordPattern = Pattern.compile(PASSWORD_PATTERN);
 
 
     public static boolean isPasswordValid(String password) {
