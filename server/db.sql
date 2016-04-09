@@ -5,8 +5,8 @@ CREATE TABLE `learners` (
     `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `username` VARCHAR(30) NOT NULL UNIQUE,
     `password` VARCHAR(20) NOT NULL,
-    `requirement_category` VARCHAR(100),
-    `combined_category` VARCHAR(100),
+    `requirement_category` VARCHAR(8),
+    `combined_category` VARCHAR(8),
     `requirement_based_rcms` VARCHAR(100),
     `combined_based_rcms` VARCHAR(100)
 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
