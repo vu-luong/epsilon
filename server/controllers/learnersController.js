@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var Learners = require('../models/learners');
+var Enrollments = require('../models/enrollments');
+var Supports = require('../models/supports');
 var hat = require('hat');
 
 router.post('/check', function(req, res){
@@ -50,7 +52,6 @@ router.post('/',
 					status: "success",
 					message: message
 				});
-				var tree = Learners.calRequirementRcms(req.body.requirement_category);
 			}
 		});
 	}
@@ -66,25 +67,10 @@ router.post('/sessions',
 				if (message && message[0] && message[0].password === password){
 					var token = hat();
 					var learner = message[0];
-					delete learner.password;
-					Learners.setTokenById({
-						id: learner.id,
-						token: token
-					}, function(err, message){
-						if (err === null){
-							res.json({
-								status: "success",
-								message: {
-									id: learner.id
-								}
-							});
-						} else {
-							console.log("Error when log in 1");
-							console.log(err);	
-							res.json({
-								status: "error",
-								error: "Lỗi không xác định"
-							});
+					res.json({
+						status: "success",
+						message: {
+							id: learner.id
 						}
 					});
 				} else{
@@ -107,29 +93,34 @@ router.post('/sessions',
 
 router.delete('/sessions', function(req, res){
 	var id = req.headers.id;
-	Learners.logout(id, function(err, message){
-		if (err){
-			console.log("Error when log in");
-			console.log(err);	
-			res.json({
-				status: 'error',
-				error: "Lỗi không xác định"
-			});
-		} else {
-			if (message.affectedRows > 0){
-				res.json({
-					status: 'success',
-					message: 'Đăng xuất thành công'
-				});
-			} else {
-				res.json({
-					status: 'error',
-					error: 'Id người dùng sai'
-				});
-			}
-			
-		}
+	res.json({
+		status: 'success',
+		message: 'Đăng xuất thành công'
 	});
+
+	// Learners.logout(id, function(err, message){
+	// 	if (err){
+	// 		console.log("Error when log in");
+	// 		console.log(err);	
+	// 		res.json({
+	// 			status: 'error',
+	// 			error: "Lỗi không xác định"
+	// 		});
+	// 	} else {
+	// 		if (message.affectedRows > 0){
+	// 			res.json({
+	// 				status: 'success',
+	// 				message: 'Đăng xuất thành công'
+	// 			});
+	// 		} else {
+	// 			res.json({
+	// 				status: 'error',
+	// 				error: 'Id người dùng sai'
+	// 			});
+	// 		}
+			
+	// 	}
+	// });
 });
 
 router.get('/:id/recommendations', function(req, res){
@@ -151,5 +142,72 @@ router.get('/:id/recommendations', function(req, res){
 	});
 });
 
+router.post('/enroll', function(req, res){
+	var learner_id = req.body.learner_id;
+	var course_id = req.body.course_id;
+	var curTime = new Date();
+	var month = curTime.getMonth() + 1;
+	//if (parseInt(month) <= 9) month = "0" + month;
+	var date = curTime.getDate();
+	//if (parseInt(date) <= 9) date = "0" + date;
+	var hour = curTime.getHours();
+	//if (parseInt(hour) <= 9) hour = "0" + hour;
+	var minute = curTime.getMinutes();
+	//if (parseInt(minute) <= 9) minute = "0" + minute;
+	var sec = curTime.getSeconds();
+	//if (parseInt(sec) <= 9) sec = "0" + sec;
 
+	var datetime = curTime.getFullYear() + '-' + month + '-' +
+					date + ' ' + hour + ':' + minute +
+					':' + sec;
+
+	console.log(datetime);
+	console.log(curTime);
+	var enrollment = {
+		learner_id: learner_id,
+		course_id: course_id,
+		datetime: datetime
+	}
+	Enrollments.addEnrollment(enrollment, function(err, message){
+		if (err){
+			console.log('Error when add enrollment');
+			console.log(err);
+			res.json({
+				status: 'error',
+				error: "Lỗi không xác định"
+			});
+		} else {
+			res.json({
+				status: 'success',
+				message: message
+			});
+			Supports.enroll(learner_id, course_id, function(err, message){
+				if (err){
+					console.log('error when update support');
+					console.log(err);
+				}
+			});
+		}
+	});
+});
+
+
+router.get('/:id/history', function(req, res){
+	var id = req.params.id;
+	Learners.getHistory(id, function(err, message){
+		if (err){
+			console.log('Error when get history');
+			console.log(err);
+			res.json({
+				status: 'error',
+				error: "Lỗi không xác định"
+			});
+		} else {
+			res.json({
+				status: 'success',
+				message: message
+			});
+		}
+	});
+});
 module.exports = router;

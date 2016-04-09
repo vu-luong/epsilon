@@ -1,6 +1,8 @@
 var db = require('./db');
 var Learners = {};
 var Recommender = require('../utils/recommendEngine');
+var Courses = require('../models/courses');
+var Enrollments = require('../models/enrollments');
 
 Learners.checkValidUsername = function(username, cb){
 	db.query('SELECT * FROM learners WHERE username = ?', username, function(err, message){
@@ -42,8 +44,9 @@ Learners.calRequirementRcms = function(category, cb){
 			cb(err, message);
 		});
 	} else {
-		// TODO get top 5 courses
-		cb(err, null);
+		Courses.getTop(function(err, message){
+			cb(err, message);
+		});
 	}
 }
 
@@ -58,7 +61,7 @@ Learners.getRecommendations = function(id, cb){
 			});
 		}
 	});
-};
+}
 
 Learners.findByUsername = function(username, cb){
 	db.query('SELECT * FROM learners WHERE username = ?', username, function(err, message){
@@ -86,5 +89,33 @@ Learners.logout = function(id, cb){
 	    });
 }
 
+Learners.getHistory = function(id, cb){
+	Enrollments.getByLearnerId(id, function(err, message){
+		if (err){
+			cb(err, null);
+		} else {
+			var idList = message;
+			Courses.getAllCourses(function(err, message){
+				if (err){
+					cb(err, null);
+				} else {
+					var res = [];
+					rawCourses = message;
+					var courseHasID = {};
+					// build tree
+					var courses = [];
+					for (var i = 0; i < rawCourses.length; i++){
+						courseHasID[rawCourses[i].id] = rawCourses[i];
+					}
+
+					for (var i = 0; i < idList.length; i++){
+						res.push(courseHasID[idList[i].course_id]);
+					}
+					cb(null, res);
+				}
+			});
+		}
+	});
+}
 
 module.exports = Learners;
