@@ -16,14 +16,14 @@ public class RegisterResultJSON extends GenericResultJSON{
     }
 
     public static class Message {
-        int id;
+        int insertId;
 
         public int getId() {
-            return id;
+            return insertId;
         }
 
         public void setId(int id) {
-            this.id = id;
+            this.insertId = id;
         }
     }
 }

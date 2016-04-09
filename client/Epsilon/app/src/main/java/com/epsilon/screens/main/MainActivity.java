@@ -1,6 +1,9 @@
 package com.epsilon.screens.main;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,9 +15,21 @@ import com.epsilon.screens.main.HomeScreenPagerAdapter;
 public class MainActivity extends AppCompatActivity {
 
 
+    private static final String TAB_POSITION_KEY = "tab position";
+    public static final int CATEGORY_TAB_POSITION = 1;
+    public static final int COURSES_TAB_POSITION = 0;
+    public static final int RECOMMEND_TAB_POSITION = 2;
+
+
     public static String POSITION = "POSITION";
     private TabLayout tabLayout;
     private ViewPager viewPager;
+
+    public static Intent makeIntent(Context context, int tabPosition) {
+        return new Intent(context, MainActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                .putExtra(TAB_POSITION_KEY, tabPosition);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +42,14 @@ public class MainActivity extends AppCompatActivity {
 
         // Set up tool bar as an action bar
         setUpToolBar();
+
+        // Go to appropriate tab
+        int tabPosition = getIntent().getIntExtra(TAB_POSITION_KEY, 0);
+        goToTab(tabPosition);
+    }
+
+    private void goToTab(int tabPosition) {
+        viewPager.setCurrentItem(tabPosition);
     }
 
 
@@ -47,4 +70,6 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
     }
+
+
 }

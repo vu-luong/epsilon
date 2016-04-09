@@ -19,7 +19,7 @@ public class Utils {
         Log.i(TAG, message);
     }
 
-    public SharedPreferences getSharedPreferences() {
+    public static SharedPreferences getSharedPreferences() {
         return PreferenceManager.getDefaultSharedPreferences(EpsilonApplication.getAppContext());
     }
 

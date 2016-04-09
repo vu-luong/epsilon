@@ -32,14 +32,17 @@ public class RegisterPresenter implements RegisterContract.UserActionListener {
         }
 
 
+        mRegisterView.showProcessingIndicator(true);
         mUserRepository.checkUsernameExist(username, new UserRepository.CheckUsernameExistCallBack() {
             @Override
             public void onOkUsernameNotExist() {
+                mRegisterView.showProcessingIndicator(false);
                 mRegisterView.goToRegisterAddCategory();
             }
 
             @Override
             public void onError(String errorMessage) {
+                mRegisterView.showProcessingIndicator(false);
                 mRegisterView.displayRegisterError(errorMessage);
             }
         });
@@ -49,16 +52,19 @@ public class RegisterPresenter implements RegisterContract.UserActionListener {
     public void register(String username, String password, int[] favoriteLevel) {
         // TODO
 
+        mRegisterView.showProcessingIndicator(true);
         mUserRepository.register(username, password, favoriteLevel, new UserRepository.SignUpResultCallBack() {
             @Override
             public void onSucceed() {
                 mRegisterView.displayRegisterSucceed();
                 mRegisterView.goToMainScreen();
+                mRegisterView.showProcessingIndicator(false);
             }
 
             @Override
             public void onError(String errorMessage) {
                 mRegisterView.displayRegisterError(errorMessage);
+                mRegisterView.showProcessingIndicator(false);
             }
         });
     }

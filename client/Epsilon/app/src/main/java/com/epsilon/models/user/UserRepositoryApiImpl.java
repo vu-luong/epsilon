@@ -47,7 +47,12 @@ public class UserRepositoryApiImpl implements UserRepository {
                     @Override
                     protected void onSucceed(RegisterResultJSON result) {
                         Utils.log(TAG, "id = " + result.getMessage().getId());
+
+                        SharedPreferences sharedPreferences = Utils.getSharedPreferences();
+                        sharedPreferences.edit().putInt(Constants.ID_TAG, result.getMessage().getId()).commit();
+
                         callBack.onSucceed();
+
                     }
 
                     @Override

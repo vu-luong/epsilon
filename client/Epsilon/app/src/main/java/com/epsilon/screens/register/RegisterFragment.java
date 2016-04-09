@@ -1,10 +1,9 @@
 package com.epsilon.screens.register;
 
-import android.nfc.Tag;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -12,13 +11,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.SeekBar;
 import android.widget.Toast;
 import android.widget.ViewAnimator;
 
 import com.epsilon.R;
-import com.epsilon.commons.GenericRetainedFragment;
 import com.epsilon.commons.GenericRetainedToolbarFragment;
+import com.epsilon.screens.main.MainActivity;
 import com.epsilon.utils.Utils;
 
 import net.qiujuer.genius.widget.GeniusSeekBar;
@@ -199,6 +197,9 @@ public class RegisterFragment extends GenericRetainedToolbarFragment implements 
     @Override
     public void goToMainScreen() {
         Utils.log(TAG, "register succeed");
+
+        Intent intent = MainActivity.makeIntent(getActivity(), MainActivity.CATEGORY_TAB_POSITION);
+        getActivity().startActivity(intent);
     }
 
     @Override
