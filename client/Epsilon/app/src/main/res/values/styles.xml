@@ -57,4 +57,11 @@
     </style>
 
     <color name="tab_indicator_color">#FFFFFF</color>
+
+    <style name="customRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/custom_rating_bar</item>
+        <item name="android:minHeight">28dip</item>
+        <item name="android:maxHeight">28dip</item>
+
+    </style>
 </resources>
