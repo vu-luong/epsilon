@@ -91,4 +91,9 @@ public class LoginFragment extends GenericRetainedFragment implements LoginContr
     public void displayLoginSucceed() {
         // TODO
     }
+
+    @Override
+    public void goToMainScreen() {
+        // TODO
+    }
 }
