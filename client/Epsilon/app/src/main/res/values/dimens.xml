@@ -4,5 +4,5 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="linear_bottom_margin">24dp</dimen>
     <dimen name="common_padding">16dp</dimen>
-    <dimen name="spacing">8</dimen>
+    <dimen name="spacing">8dp</dimen>
 </resources>
