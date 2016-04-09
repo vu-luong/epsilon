@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Epsilon</string>
     <string name="network_error_string">Network connection error</string>
+    <string name="category1">Công nghệ thông tin</string>
 </resources>
