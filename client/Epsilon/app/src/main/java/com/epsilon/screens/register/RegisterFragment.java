@@ -113,6 +113,9 @@ public class RegisterFragment extends GenericRetainedToolbarFragment implements 
         mSeekBar3.setOnTouchListener(listener);
         mSeekBar4.setOnTouchListener(listener);
         mSeekBar5.setOnTouchListener(listener);
+        mSeekBar6.setOnTouchListener(listener);
+        mSeekBar7.setOnTouchListener(listener);
+        mSeekBar8.setOnTouchListener(listener);
     }
 
     void setUpSignUpWizardView() {

@@ -68,6 +68,6 @@ public class CategoryFragment extends GenericRetainedFragment implements Categor
 
     @Override
     public void goToCategoryCoursesScreen(int categoryId) {
-        
+
     }
 }
