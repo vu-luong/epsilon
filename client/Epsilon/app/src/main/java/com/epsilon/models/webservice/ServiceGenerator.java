@@ -58,7 +58,6 @@ public class ServiceGenerator {
                         Request request = chain.request();
                         Utils.log("REQUEST", request.url() + " " + request.headers().toString());
                         Request modifiedRequest = request.newBuilder()
-                                .addHeader("Accept", "application/api.packageshipper.v1")
                                 .build();
 
                         return chain.proceed(modifiedRequest);
