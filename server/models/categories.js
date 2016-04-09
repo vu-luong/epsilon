@@ -28,6 +28,7 @@ Categories.getAllCourses = function(id, cb){
 				if (value >= TRIGGER_VALUE) result.push(courses[i]);
 			}
 			cb(null, result);
+			console.log('category ' + id + ':' + result.length);
 		}
 	});
 }

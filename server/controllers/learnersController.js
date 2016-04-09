@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Learners = require('../models/learners');
 var Enrollments = require('../models/enrollments');
+var Supports = require('../models/supports');
 var hat = require('hat');
 
 router.post('/check', function(req, res){
@@ -179,6 +180,12 @@ router.post('/enroll', function(req, res){
 			res.json({
 				status: 'success',
 				message: message
+			});
+			Supports.enroll(learner_id, course_id, function(err, message){
+				if (err){
+					console.log('error when update support');
+					console.log(err);
+				}
 			});
 		}
 	});

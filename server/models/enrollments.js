@@ -12,4 +12,11 @@ Enrollments.getByLearnerId = function(learner_id, cb){
 			cb(err, message);
 		});
 }
+
+Enrollments.check = function(learner_id, course_id, cb){
+	db.query('SELECT * FROM enrollments WHERE learner_id = ? AND course_id = ?',
+		[learner_id, course_id] , function(err, message){
+			cb(err, message);
+		});
+}
 module.exports = Enrollments;
