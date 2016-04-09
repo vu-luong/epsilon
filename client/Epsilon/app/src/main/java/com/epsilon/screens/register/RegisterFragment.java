@@ -9,17 +9,16 @@ import android.view.ViewGroup;
 
 import com.epsilon.R;
 import com.epsilon.commons.GenericRetainedFragment;
+import com.epsilon.commons.GenericRetainedToolbarFragment;
 
 /**
  * Created by Dandoh on 4/9/16.
  */
-public class RegisterFragment extends GenericRetainedFragment{
+public class RegisterFragment extends GenericRetainedToolbarFragment {
 
     public static Fragment getInstance() {
         return new RegisterFragment();
     }
-
-
 
     @Nullable
     @Override
