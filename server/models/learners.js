@@ -88,5 +88,4 @@ Learners.logout = function(id, cb){
 	    });
 }
 
-
 module.exports = Learners;
