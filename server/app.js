@@ -16,9 +16,13 @@ app.use(bodyParser.urlencoded({extended: false}));
 // declare controllers
 var learnersController = require('./controllers/learnersController');
 var coursesController = require('./controllers/coursesController');
+var categoriesController = require('./controllers/categoriesController');
 
 // cross domain config
 app.use(function (req, res, next) {
+    console.log('Client request:');
+    console.log(req.body);
+    console.log('--------------');
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
@@ -27,6 +31,7 @@ app.use(function (req, res, next) {
 // TODO:add controller
 app.use('/learners', learnersController);
 app.use('/courses', coursesController);
+app.use('/categories', categoriesController);
 
 // Web-client
 app.use('/', express.static(path.join(__dirname, 'client')));

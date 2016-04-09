@@ -5,12 +5,6 @@ CREATE TABLE `learners` (
     `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `username` VARCHAR(30) NOT NULL UNIQUE,
     `password` VARCHAR(20) NOT NULL,
-    `token` VARCHAR(50),
-    `email` VARCHAR(30) NOT NULL UNIQUE,
-    `name` VARCHAR(40),
-    `image_url` VARCHAR(200),
-    `age` INT,
-    `language` VARCHAR(20),
     `requirement_category` VARCHAR(100),
     `combined_category` VARCHAR(100),
     `requirement_based_rcms` VARCHAR(100),
@@ -33,7 +27,8 @@ CREATE TABLE `courses` (
     `rating` INT,
     `link` VARCHAR(200) NOT NULL,
     `provider` VARCHAR(40) NOT NULL,
-    `price` VARCHAR(100)
+    `price` VARCHAR(100),
+    `learners` INT default 0
 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 CREATE TABLE `categories` (
@@ -48,6 +43,14 @@ CREATE TABLE `enrollments` (
     `datetime` DATETIME NOT NULL default '0000-00-00 00:00:00'
 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
+CREATE TABLE `supports` (
+    `course1` INT NOT NULL,
+    `course2` INT NOT NULL,
+    `both` INT NOT NULL default 0,
+    `order` INT NOT NULL default 0,
+    `prior` INT NOT NULL default 0
+) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
 ALTER TABLE courses
 ADD FOREIGN KEY (author_name)
 REFERENCES authors(name);
@@ -59,3 +62,11 @@ REFERENCES courses(id);
 ALTER TABLE enrollments
 ADD FOREIGN KEY (learner_id)
 REFERENCES learners(id);
+
+ALTER TABLE supports
+ADD FOREIGN KEY (course1)
+REFERENCES courses(id);
+
+ALTER TABLE supports
+ADD FOREIGN KEY (course2)
+REFERENCES courses(id);

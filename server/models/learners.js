@@ -1,6 +1,12 @@
 var db = require('./db');
 var Learners = {};
 
+Learners.checkValidUsername = function(username, cb){
+	db.query('SELECT * FROM learners WHERE username = ?', username, function(err, message){
+			cb(err, message);
+		});
+}
+
 Learners.addLearner = function (learner, cb){
 	db.query('INSERT INTO learners SET ?', learner, function(err, message){
 		cb(err, message);
