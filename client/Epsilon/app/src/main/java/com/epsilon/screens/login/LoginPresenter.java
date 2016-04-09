@@ -21,7 +21,7 @@ public class LoginPresenter implements LoginContract.UserActionListener{
     @Override
     public void login(String username, String password) {
 
-        if (TextUtils.isEmpty(username) || !Validator.isNameValid(username)) {
+        if (TextUtils.isEmpty(username) || !Validator.isUsernameValid(username)) {
             mView.displayErrorUsername();
             return;
         }

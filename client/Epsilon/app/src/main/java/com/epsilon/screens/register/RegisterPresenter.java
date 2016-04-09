@@ -20,10 +20,11 @@ public class RegisterPresenter implements RegisterContract.UserActionListener {
 
     @Override
     public void completeBasic(String username, String password) {
-        if (TextUtils.isEmpty(username) || !Validator.isNameValid(username)) {
+        if (TextUtils.isEmpty(username) || !Validator.isUsernameValid(username)) {
             mRegisterView.displayErrorUsername();
             return;
         }
+
 
         if (TextUtils.isEmpty(password) || !Validator.isPasswordValid(password)) {
             mRegisterView.displayErrorPassword();
@@ -31,11 +32,34 @@ public class RegisterPresenter implements RegisterContract.UserActionListener {
         }
 
 
-        mRegisterView.goToRegisterAddCategory();
+        mUserRepository.checkUsernameExist(username, new UserRepository.CheckUsernameExistCallBack() {
+            @Override
+            public void onOkUsernameNotExist() {
+                mRegisterView.goToRegisterAddCategory();
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                mRegisterView.displayRegisterError(errorMessage);
+            }
+        });
     }
 
     @Override
     public void register(String username, String password, int[] favoriteLevel) {
         // TODO
+
+        mUserRepository.register(username, password, favoriteLevel, new UserRepository.SignUpResultCallBack() {
+            @Override
+            public void onSucceed() {
+                mRegisterView.displayRegisterSucceed();
+                mRegisterView.goToMainScreen();
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                mRegisterView.displayRegisterError(errorMessage);
+            }
+        });
     }
 }

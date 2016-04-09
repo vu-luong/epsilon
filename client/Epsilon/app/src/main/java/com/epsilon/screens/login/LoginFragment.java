@@ -1,5 +1,6 @@
 package com.epsilon.screens.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import com.epsilon.R;
 import com.epsilon.commons.GenericRetainedFragment;
+import com.epsilon.screens.register.RegisterActivity;
 import com.epsilon.utils.Utils;
 
 import butterknife.Bind;
@@ -86,7 +88,8 @@ public class LoginFragment extends GenericRetainedFragment implements LoginContr
 
     @Override
     public void goToRegisterScreen() {
-        // TODO
+        Intent intent = RegisterActivity.makeIntent(getActivity());
+        startActivity(intent);
     }
 
     @Override

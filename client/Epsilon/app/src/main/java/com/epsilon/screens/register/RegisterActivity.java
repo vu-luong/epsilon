@@ -1,6 +1,9 @@
 package com.epsilon.screens.register;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 
 import com.epsilon.R;
 import com.epsilon.commons.GenericActivity;
@@ -15,5 +18,9 @@ public class RegisterActivity extends GenericActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_holder);
         initFragment(RegisterFragment.getInstance());
+    }
+
+    public static Intent makeIntent(Context context) {
+        return new Intent(context, RegisterActivity.class);
     }
 }

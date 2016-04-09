@@ -12,6 +12,8 @@ public interface RegisterContract {
         void displayErrorUsername();
         void displayErrorPassword();
         void goToMainScreen();
+        void displayRegisterSucceed();
+        void displayRegisterError(String errorMessage);
     }
 
     interface UserActionListener {
