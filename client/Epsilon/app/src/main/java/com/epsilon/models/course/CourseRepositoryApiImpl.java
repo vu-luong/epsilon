@@ -4,7 +4,7 @@ import com.epsilon.commons.GenericRetrofitCallback;
 import com.epsilon.models.entities.Course;
 import com.epsilon.models.webservice.ServiceGenerator;
 import com.epsilon.models.webservice.json.CourseResultJSON;
-import com.epsilon.models.webservice.json.CoursesOfCategoryResultJSON;
+import com.epsilon.models.webservice.json.CoursesListResultJSON;
 
 import java.util.HashMap;
 import java.util.List;
@@ -24,11 +24,11 @@ public class CourseRepositoryApiImpl implements CourseRepository {
     }
 
     @Override
-    public void getCoursesOfCategory(int id, final CoursesOfCategoryResultCallBack callBack) {
+    public void getCoursesOfCategory(int id, final CoursesListResultCallBack callBack) {
         ServiceGenerator.getEpsilonWebService().getCoursesOfCategory(id)
-                .enqueue(new GenericRetrofitCallback<CoursesOfCategoryResultJSON>() {
+                .enqueue(new GenericRetrofitCallback<CoursesListResultJSON>() {
                     @Override
-                    protected void onSucceed(CoursesOfCategoryResultJSON result) {
+                    protected void onSucceed(CoursesListResultJSON result) {
 
                         List<Course> courses = result.getMessage();
                         for (Course course: courses) {
@@ -65,5 +65,22 @@ public class CourseRepositoryApiImpl implements CourseRepository {
             });
         }
 
+    }
+
+    @Override
+    public void getRecommendedCourseWhenOpeningCourse(int courseId, final CoursesListResultCallBack callBack) {
+        ServiceGenerator.getEpsilonWebService()
+                .getRecommendedCourseWhenOpeningCourse(courseId)
+                .enqueue(new GenericRetrofitCallback<CoursesListResultJSON>() {
+                    @Override
+                    protected void onSucceed(CoursesListResultJSON result) {
+                        callBack.onSucceed(result.getMessage());
+                    }
+
+                    @Override
+                    protected void onError(String message) {
+                        callBack.onError(message);
+                    }
+                });
     }
 }

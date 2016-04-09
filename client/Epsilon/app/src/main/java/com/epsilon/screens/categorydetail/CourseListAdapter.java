@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.epsilon.EpsilonApplication;
 import com.epsilon.R;
+import com.epsilon.models.entities.Category;
 import com.epsilon.models.entities.Course;
 import com.epsilon.utils.Utils;
 import com.squareup.picasso.NetworkPolicy;
@@ -29,6 +30,7 @@ import java.util.List;
 public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.ViewHolder> {
 
     private static final String TAG = "CourseListAdapter";
+    private OnCourseItemClick mOnCourseItemClick;
     private List<Course> mCourses;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -38,7 +40,8 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Vi
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public CourseListAdapter() {
+    public CourseListAdapter(OnCourseItemClick onCourseItemClick) {
+        mOnCourseItemClick = onCourseItemClick;
         mCourses = new ArrayList<>();
     }
 
@@ -57,7 +60,7 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Vi
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         View v = holder.itemView;
 
         ImageView thumbNailImageView = (ImageView) v.findViewById(R.id.item_imgv_course_thumbnail);
@@ -68,7 +71,7 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Vi
         ImageView providerLogoImageView = (ImageView) v.findViewById(R.id.item_imgv_provider);
 
 
-        Course course = mCourses.get(position);
+        final Course course = mCourses.get(position);
 
         // Set information
         Picasso.with(EpsilonApplication.getAppContext())
@@ -91,6 +94,13 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Vi
         } else if (provider.equals("3hoc.vn")) {
             providerLogoImageView.setImageResource(R.drawable.icon_bahoc);
         }
+
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mOnCourseItemClick.onClick(position, course);
+            }
+        });
 
     }
 
@@ -128,5 +138,9 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Vi
 
         this.mCourses = mCourses;
         notifyDataSetChanged();
+    }
+
+    public interface OnCourseItemClick {
+        void onClick(int position, Course course);
     }
 }

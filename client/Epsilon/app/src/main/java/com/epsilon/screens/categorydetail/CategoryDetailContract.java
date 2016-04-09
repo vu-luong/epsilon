@@ -13,14 +13,14 @@ public interface CategoryDetailContract {
 
     interface View extends GenericViewInterface {
         void displayAllCoursesOfCategory(List<Course> list);
-        void goToCourseDetailScreen(int position);
+        void goToCourseDetailScreen(int position, int courseId);
         void displayNetworkError(String error);
 
     }
 
     interface UserActionListener {
         void getCoursesOfCategory(int id);
-        void viewCourseDetail(int position);
+        void viewCourseDetail(int position, Course course);
     }
 
 }

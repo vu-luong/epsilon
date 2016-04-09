@@ -1,5 +1,6 @@
 package com.epsilon.screens.categorydetail;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import com.epsilon.commons.GenericRetainedToolbarFragment;
 import com.epsilon.customview.GridSpacingItemDecoration;
 import com.epsilon.models.entities.Course;
 import com.epsilon.screens.category.CategoryListAdapter;
+import com.epsilon.screens.coursedetail.CourseDetailActivity;
 
 import java.util.List;
 
@@ -25,7 +27,8 @@ import utils.Injection;
 /**
  * Created by AnhVu on 4/9/16.
  */
-public class CategoryDetailFragment extends GenericRetainedToolbarFragment implements CategoryDetailContract.View{
+public class CategoryDetailFragment extends GenericRetainedToolbarFragment
+        implements CategoryDetailContract.View, CourseListAdapter.OnCourseItemClick{
 
     private static final String CATEGORY_KEY = "category key";
     private CategoryDetailContract.UserActionListener mUserActionListener;
@@ -50,7 +53,7 @@ public class CategoryDetailFragment extends GenericRetainedToolbarFragment imple
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mUserActionListener = new CategoryDetailPresenter(this, Injection.provideCourseRepository());
-        mCourseListAdapter = new CourseListAdapter();
+        mCourseListAdapter = new CourseListAdapter(this);
     }
 
     @Nullable
@@ -83,12 +86,18 @@ public class CategoryDetailFragment extends GenericRetainedToolbarFragment imple
     }
 
     @Override
-    public void goToCourseDetailScreen(int position) {
-        // TODO
+    public void goToCourseDetailScreen(int position, int courseId) {
+        Intent intent = CourseDetailActivity.makeIntent(getActivity(), courseId);
+        startActivity(intent);
     }
 
     @Override
     public void displayNetworkError(String error) {
         Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClick(int position, Course course) {
+        mUserActionListener.viewCourseDetail(position, course);
     }
 }

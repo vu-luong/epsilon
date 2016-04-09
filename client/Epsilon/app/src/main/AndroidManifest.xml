@@ -17,9 +17,11 @@
 
         <activity android:name=".screens.login.LoginActivity"
             android:theme="@style/AppTheme.Dark">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".screens.register.RegisterActivity"
             android:theme="@style/AppTheme.Dark">
@@ -28,11 +30,7 @@
 
         <activity android:name=".screens.categorydetail.CategoryDetailActivity">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
     </application>

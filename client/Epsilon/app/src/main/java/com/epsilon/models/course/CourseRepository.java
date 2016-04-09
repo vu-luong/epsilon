@@ -10,9 +10,9 @@ import java.util.List;
  */
 public interface CourseRepository {
 
-    void getCoursesOfCategory(int id, CoursesOfCategoryResultCallBack callBack);
+    void getCoursesOfCategory(int id, CoursesListResultCallBack callBack);
 
-    interface CoursesOfCategoryResultCallBack extends GenericCallback {
+    interface CoursesListResultCallBack extends GenericCallback {
         void onSucceed(List<Course> courses);
     }
 
@@ -22,5 +22,7 @@ public interface CourseRepository {
         void onSucceed(Course course);
     }
 
+    void getRecommendedCourseWhenOpeningCourse(int courseId,
+                                               CoursesListResultCallBack callBack);
 
 }

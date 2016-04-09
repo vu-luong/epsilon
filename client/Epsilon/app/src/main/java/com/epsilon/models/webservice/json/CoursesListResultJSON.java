@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by AnhVu on 4/9/16.
  */
-public class CoursesOfCategoryResultJSON extends GenericResultJSON{
+public class CoursesListResultJSON extends GenericResultJSON{
 
     List<Course> message;
 

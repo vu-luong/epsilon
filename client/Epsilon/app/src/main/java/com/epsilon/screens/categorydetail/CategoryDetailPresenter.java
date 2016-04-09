@@ -21,7 +21,7 @@ public class CategoryDetailPresenter implements CategoryDetailContract.UserActio
     @Override
     public void getCoursesOfCategory(int id) {
         mCategoryDetailView.showProcessingIndicator(true);
-        mCourseRepositoryApi.getCoursesOfCategory(id, new CourseRepository.CoursesOfCategoryResultCallBack() {
+        mCourseRepositoryApi.getCoursesOfCategory(id, new CourseRepository.CoursesListResultCallBack() {
             @Override
             public void onSucceed(List<Course> courses) {
                 mCategoryDetailView.showProcessingIndicator(false);
@@ -37,7 +37,7 @@ public class CategoryDetailPresenter implements CategoryDetailContract.UserActio
     }
 
     @Override
-    public void viewCourseDetail(int position) {
-
+    public void viewCourseDetail(int position, Course course) {
+        mCategoryDetailView.goToCourseDetailScreen(position, course.getId());
     }
 }
