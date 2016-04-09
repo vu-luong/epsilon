@@ -1,6 +1,8 @@
 package com.epsilon.models.webservice;
 
+import com.epsilon.models.entities.Course;
 import com.epsilon.models.webservice.json.AllCategoriesResultJSON;
+import com.epsilon.models.webservice.json.CourseResultJSON;
 import com.epsilon.models.webservice.json.CoursesOfCategoryResultJSON;
 import com.epsilon.models.webservice.json.LoginRequestJSON;
 import com.epsilon.models.webservice.json.LoginResultJSON;
@@ -22,6 +24,9 @@ public interface EpsilonMainService {
 
     @GET("/categories/{id}/all")
     Call<CoursesOfCategoryResultJSON> getCoursesOfCategory(@Path("id") int id);
+
+    @GET("/courses/{id}")
+    Call<CourseResultJSON> getCourseById(@Path("id") int id);
 
 
 }

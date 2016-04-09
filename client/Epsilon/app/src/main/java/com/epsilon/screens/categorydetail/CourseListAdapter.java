@@ -15,6 +15,7 @@ import com.epsilon.EpsilonApplication;
 import com.epsilon.R;
 import com.epsilon.models.entities.Course;
 import com.epsilon.utils.Utils;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;

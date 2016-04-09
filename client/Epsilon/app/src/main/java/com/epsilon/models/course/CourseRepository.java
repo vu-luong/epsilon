@@ -16,5 +16,11 @@ public interface CourseRepository {
         void onSucceed(List<Course> courses);
     }
 
+    void getCourseById(int id, CourseResultCallBack callBack);
+
+    interface CourseResultCallBack extends GenericCallback {
+        void onSucceed(Course course);
+    }
+
 
 }

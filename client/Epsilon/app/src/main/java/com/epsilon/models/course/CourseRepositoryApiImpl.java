@@ -3,6 +3,7 @@ package com.epsilon.models.course;
 import com.epsilon.commons.GenericRetrofitCallback;
 import com.epsilon.models.entities.Course;
 import com.epsilon.models.webservice.ServiceGenerator;
+import com.epsilon.models.webservice.json.CourseResultJSON;
 import com.epsilon.models.webservice.json.CoursesOfCategoryResultJSON;
 
 import java.util.HashMap;
@@ -42,5 +43,27 @@ public class CourseRepositoryApiImpl implements CourseRepository {
                         callBack.onError(message);
                     }
                 });
+    }
+
+    @Override
+    public void getCourseById(int id, final CourseResultCallBack callBack) {
+
+        if (mCachedCourses.containsKey(id)) {
+            callBack.onSucceed(mCachedCourses.get(id));
+        } else {
+            ServiceGenerator.getEpsilonWebService()
+                    .getCourseById(id).enqueue(new GenericRetrofitCallback<CourseResultJSON>() {
+                @Override
+                protected void onSucceed(CourseResultJSON result) {
+                    callBack.onSucceed(result.getMessage());
+                }
+
+                @Override
+                protected void onError(String message) {
+                    callBack.onError(message);
+                }
+            });
+        }
+
     }
 }
