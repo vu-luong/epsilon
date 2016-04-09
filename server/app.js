@@ -15,8 +15,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 // declare controllers
 var learnersController = require('./controllers/learnersController');
-
-
+var coursesController = require('./controllers/coursesController');
 
 // cross domain config
 app.use(function (req, res, next) {
@@ -27,6 +26,7 @@ app.use(function (req, res, next) {
 
 // TODO:add controller
 app.use('/learners', learnersController);
+app.use('/courses', coursesController);
 
 // Web-client
 app.use('/', express.static(path.join(__dirname, 'client')));
