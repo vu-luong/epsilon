@@ -6,13 +6,19 @@
     android:orientation="vertical"
     android:paddingLeft="24dp"
     android:paddingRight="24dp"
-    android:paddingTop="220dp">
+    android:paddingTop="50dp">
+
+    <ImageView
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:src="@drawable/logo_inapp"
+        android:layout_gravity="center_horizontal"/>
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp">
+        android:layout_marginTop="48dp">
 
         <EditText
             android:id="@+id/login_edt_username"
