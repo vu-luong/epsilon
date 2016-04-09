@@ -123,8 +123,8 @@ router.delete('/sessions', function(req, res){
 	// });
 });
 
-router.get('/:id/recommendations', function(req, res){
-	var id = req.params.id;
+router.get('/recommendations', function(req, res){
+	var id = req.headers.id;
 	Learners.getRecommendations(id, function(err, message){
 		if (err){
 			console.log('Error when get recommendations');
@@ -143,7 +143,7 @@ router.get('/:id/recommendations', function(req, res){
 });
 
 router.post('/enroll', function(req, res){
-	var learner_id = req.body.learner_id;
+	var learner_id = req.headers.id;
 	var course_id = req.body.course_id;
 	var curTime = new Date();
 	var month = curTime.getMonth() + 1;
@@ -187,13 +187,20 @@ router.post('/enroll', function(req, res){
 					console.log(err);
 				}
 			});
+			//
+			Learners.updateCombinedCategory(course_id, learner_id, function(err, message){
+				if (err){
+					console.log('error when update combined category');
+					console.log(err);
+				}
+			});
 		}
 	});
 });
 
 
-router.get('/:id/history', function(req, res){
-	var id = req.params.id;
+router.get('/history', function(req, res){
+	var id = req.headers.id;
 	Learners.getHistory(id, function(err, message){
 		if (err){
 			console.log('Error when get history');

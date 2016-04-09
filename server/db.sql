@@ -5,8 +5,8 @@ CREATE TABLE `learners` (
     `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `username` VARCHAR(30) NOT NULL UNIQUE,
     `password` VARCHAR(20) NOT NULL,
-    `requirement_category` VARCHAR(8),
-    `combined_category` VARCHAR(8),
+    `requirement_category` VARCHAR(8) default '00000000',
+    `combined_category` VARCHAR(8) default '00000000',
     `requirement_based_rcms` VARCHAR(100),
     `combined_based_rcms` VARCHAR(100)
 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
@@ -56,6 +56,9 @@ ALTER TABLE enrollments
 ADD FOREIGN KEY (learner_id)
 REFERENCES learners(id);
 
+ALTER TABLE enrollments
+ADD UNIQUE `ct_enrollments`(`course_id`, `learner_id`);
+
 CREATE TABLE `supports` (
     `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `course1` INT NOT NULL,
@@ -88,4 +91,4 @@ ADD FOREIGN KEY (course2)
 REFERENCES courses(id);
 
 ALTER TABLE blacklist
-ADD UNIQUE `something`(`course1`, `course2`);
+ADD UNIQUE `ct_blacklist`(`course1`, `course2`);
