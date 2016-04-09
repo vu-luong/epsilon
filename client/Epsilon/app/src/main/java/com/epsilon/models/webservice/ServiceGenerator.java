@@ -74,11 +74,8 @@ public class ServiceGenerator {
      * @return
      */
     private static OkHttpClient getAuthenticatedHttpClient() {
-        Context context = EpsilonApplication.getAppContext();
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-
-        final String authToken = sharedPreferences.getString(Constants.TOKEN_TAG,
-                "------Random invalid default token-----");
+        SharedPreferences sharedPreferences = Utils.getSharedPreferences();
+        final int userId = sharedPreferences.getInt(Constants.ID_TAG, -1);
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(new Interceptor() {
@@ -99,7 +96,7 @@ public class ServiceGenerator {
                         Request modifiedRequest = request.newBuilder()
                                 // TODO - add authorization
 //                                .addHeader("token", getAccessToken())
-                                .addHeader("id", 1 + "")
+                                .addHeader("id", userId + "")
                                 .build();
                         return chain.proceed(modifiedRequest);
                     }

@@ -25,4 +25,5 @@ public interface CourseRepository {
     void getRecommendedCourseWhenOpeningCourse(int courseId,
                                                CoursesListResultCallBack callBack);
 
+    void getMyCourses(CoursesListResultCallBack callBack);
 }

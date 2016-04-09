@@ -69,6 +69,8 @@ public class UserRepositoryApiImpl implements UserRepository {
                 .enqueue(new GenericRetrofitCallback<LoginResultJSON>() {
                     @Override
                     protected void onSucceed(LoginResultJSON result) {
+                        SharedPreferences sharedPreferences = Utils.getSharedPreferences();
+                        sharedPreferences.edit().putInt(Constants.ID_TAG, result.getMessage().getId()).commit();
                         callBack.onSucceed();
                     }
 

@@ -25,4 +25,7 @@ public interface EpsilonMainService {
     @GET("/courses/{id}/recommends")
     Call<CoursesListResultJSON> getRecommendedCourseWhenOpeningCourse(@Path("id") int courseId);
 
+    @GET("/learners/history")
+    Call<CoursesListResultJSON> getMyCourses();
+
 }
