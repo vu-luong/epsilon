@@ -7,6 +7,8 @@ import android.preference.PreferenceManager;
 import com.epsilon.EpsilonApplication;
 import com.epsilon.commons.GenericRetrofitCallback;
 import com.epsilon.models.webservice.ServiceGenerator;
+import com.epsilon.models.webservice.json.CheckUsernameExistRequestJSON;
+import com.epsilon.models.webservice.json.CheckUsernameExistResultJSON;
 import com.epsilon.models.webservice.json.LoginRequestJSON;
 import com.epsilon.models.webservice.json.LoginResultJSON;
 import com.epsilon.models.webservice.json.RegisterRequestJSON;
@@ -63,6 +65,23 @@ public class UserRepositoryApiImpl implements UserRepository {
                     @Override
                     protected void onSucceed(LoginResultJSON result) {
                         callBack.onSucceed();
+                    }
+
+                    @Override
+                    protected void onError(String message) {
+                        callBack.onError(message);
+                    }
+                });
+    }
+
+    @Override
+    public void checkUsernameExist(String username, final CheckUsernameExistCallBack callBack) {
+        ServiceGenerator.getEpsilonUserService()
+                .checkUserNameExist(new CheckUsernameExistRequestJSON(username))
+                .enqueue(new GenericRetrofitCallback<CheckUsernameExistResultJSON>() {
+                    @Override
+                    protected void onSucceed(CheckUsernameExistResultJSON result) {
+                        callBack.onOkUsernameNotExist();
                     }
 
                     @Override

@@ -25,13 +25,24 @@ public class RegisterPresenter implements RegisterContract.UserActionListener {
             return;
         }
 
+
         if (TextUtils.isEmpty(password) || !Validator.isPasswordValid(password)) {
             mRegisterView.displayErrorPassword();
             return;
         }
 
 
-        mRegisterView.goToRegisterAddCategory();
+        mUserRepository.checkUsernameExist(username, new UserRepository.CheckUsernameExistCallBack() {
+            @Override
+            public void onOkUsernameNotExist() {
+                mRegisterView.goToRegisterAddCategory();
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                mRegisterView.displayRegisterError(errorMessage);
+            }
+        });
     }
 
     @Override

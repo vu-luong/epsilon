@@ -3,6 +3,7 @@ package com.epsilon.screens.register;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,7 +27,7 @@ import utils.Injection;
 /**
  * Created by Dandoh on 4/9/16.
  */
-public class RegisterFragment extends GenericRetainedToolbarFragment implements RegisterContract.View{
+public class RegisterFragment extends GenericRetainedToolbarFragment implements RegisterContract.View {
 
 
     @Bind(R.id.register_edt_password)
@@ -50,9 +51,6 @@ public class RegisterFragment extends GenericRetainedToolbarFragment implements 
     GeniusSeekBar mSeekBar7;
     @Bind(R.id.seekBar8)
     GeniusSeekBar mSeekBar8;
-
-
-
 
 
     private int mCurrentScreenIndex = 1; // begin screen
@@ -82,6 +80,24 @@ public class RegisterFragment extends GenericRetainedToolbarFragment implements 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        if (getView() != null) {
+            getView().requestFocus();
+            getView().setFocusableInTouchMode(true);
+            getView().setOnKeyListener(new View.OnKeyListener() {
+                @Override
+                public boolean onKey(View v, int keyCode, KeyEvent event) {
+                    if (keyCode == KeyEvent.KEYCODE_BACK) {
+                        if (mCurrentScreenIndex == 2) {
+                            wizardBack();
+                            return true;
+                        }
+                    }
+
+                    return false;
+                }
+            });
+        }
 
         setUpSignUpWizardView();
     }
@@ -115,7 +131,7 @@ public class RegisterFragment extends GenericRetainedToolbarFragment implements 
     void completeRegister() {
         Utils.log(TAG, "Calling complete register");
 
-        int[] favorite = new int[] {
+        int[] favorite = new int[]{
                 mSeekBar1.getProgress(),
                 mSeekBar2.getProgress(),
                 mSeekBar3.getProgress(),

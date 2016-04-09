@@ -9,4 +9,7 @@
     <string name="category6">Sức khỏe</string>
     <string name="category7">Nghệ thuật - Thiết kế</string>
     <string name="category8">Ứng dụng văn phòng</string>
+    <string name="login_text">Đăng nhập</string>
+    <string name="go_to_register">Chưa có tài khoản ? Đăng kí</string>
+    <string name="next">Tiếp tục</string>
 </resources>

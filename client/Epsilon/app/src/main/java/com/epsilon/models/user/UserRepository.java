@@ -18,6 +18,8 @@ public interface UserRepository {
         void onSucceed();
     }
 
-
-
+    interface CheckUsernameExistCallBack extends GenericCallback{
+        void onOkUsernameNotExist();
+    }
+    void checkUsernameExist(String username, CheckUsernameExistCallBack callBack);
 }
