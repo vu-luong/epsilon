@@ -3,7 +3,7 @@ package com.epsilon.models.webservice.json;
 /**
  * Created by Dandoh on 4/9/16.
  */
-public class LoginResultJSON extends GenericResultJSON {
+public class RegisterResultJSON extends GenericResultJSON{
 
     Message message;
 
@@ -26,6 +26,4 @@ public class LoginResultJSON extends GenericResultJSON {
             this.id = id;
         }
     }
-
-
 }

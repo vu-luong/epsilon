@@ -9,6 +9,8 @@ import com.epsilon.commons.GenericRetrofitCallback;
 import com.epsilon.models.webservice.ServiceGenerator;
 import com.epsilon.models.webservice.json.LoginRequestJSON;
 import com.epsilon.models.webservice.json.LoginResultJSON;
+import com.epsilon.models.webservice.json.RegisterRequestJSON;
+import com.epsilon.models.webservice.json.RegisterResultJSON;
 import com.epsilon.utils.Constants;
 import com.epsilon.utils.Utils;
 
@@ -30,8 +32,27 @@ public class UserRepositoryApiImpl implements UserRepository {
 
 
     @Override
-    public void register(String username, String password, int[] favorite, final SignUpResultCallBack callBack) {
+    public void register(String username, String password, int[] favorite,
+                         final SignUpResultCallBack callBack) {
+        String requirement_category = "";
+        for (int i = 0; i < favorite.length; i++) {
+            requirement_category += favorite[i];
+        }
 
+        ServiceGenerator.getEpsilonUserService()
+                .register(new RegisterRequestJSON(username, password, requirement_category))
+                .enqueue(new GenericRetrofitCallback<RegisterResultJSON>() {
+                    @Override
+                    protected void onSucceed(RegisterResultJSON result) {
+                        Utils.log(TAG, "id = " + result.getMessage().getId());
+                        callBack.onSucceed();
+                    }
+
+                    @Override
+                    protected void onError(String message) {
+                        callBack.onError(message);
+                    }
+                });
     }
 
     @Override
@@ -41,7 +62,6 @@ public class UserRepositoryApiImpl implements UserRepository {
                 .enqueue(new GenericRetrofitCallback<LoginResultJSON>() {
                     @Override
                     protected void onSucceed(LoginResultJSON result) {
-                        Utils.log(TAG, result.getMessage().getInsertId() + " ");
                         callBack.onSucceed();
                     }
 

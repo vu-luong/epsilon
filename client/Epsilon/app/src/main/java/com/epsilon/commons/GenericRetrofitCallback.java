@@ -24,7 +24,6 @@ public abstract class GenericRetrofitCallback<T extends GenericResultJSON> imple
     @Override
     public void onResponse(Call<T> call, Response<T> response) {
         Utils.log(TAG, response.code() + " ");
-
         if (response.body() != null) {
             T result = response.body();
             Utils.log(TAG, result.toString());

@@ -85,7 +85,9 @@ public class ServiceGenerator {
                     @Override
                     public Response intercept(Chain chain) throws IOException {
                         Request request = chain.request();
-                        Utils.log("REQUEST", request.url() + " " + request.headers().toString());
+                        Utils.log("REQUEST",
+                                request.method() + " "
+                                        + request.url() + " " + request.headers().toString());
                         return chain.proceed(request);
                     }
                 })

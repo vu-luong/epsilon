@@ -5,7 +5,6 @@ package com.epsilon.models.webservice.json;
  */
 public class GenericResultJSON {
     protected String status;
-
     protected String error;
 
     public String getError() {
