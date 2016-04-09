@@ -6,7 +6,8 @@
     android:orientation="vertical"
     android:paddingLeft="24dp"
     android:paddingRight="24dp"
-    android:paddingTop="50dp">
+    android:paddingTop="50dp"
+    android:scrollbars="none">
 
 
     <LinearLayout
@@ -17,18 +18,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="8dp"
+            android:paddingBottom="@dimen/linear_bottom_margin">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/category1"
+                android:textSize="18sp"
                 android:textColor="@android:color/white"/>
 
             <net.qiujuer.genius.widget.GeniusSeekBar
                 android:id="@+id/seekBar1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingTop="5dp"
                 genius:g_allowTrackClickToDrag="false"
                 genius:g_indicatorBackgroundColor="#0cb45a"
                 genius:g_indicatorFormatter="%d"
@@ -36,8 +39,8 @@
                 genius:g_indicatorTextAppearance="@style/CustomFloaterTextAppearance"
                 genius:g_rippleColor="#0cb45a"
                 genius:g_scrubberColor="#00b153"
-                genius:g_thumbColor="#217f4d"
-                genius:g_trackColor="#ff925c"
+                genius:g_thumbColor="#66ff69"
+                genius:g_trackColor="#979797"
                 genius:g_tickSize="8sp"
                 genius:g_touchSize="12sp"
                 genius:g_thumbSize="10sp"
@@ -49,21 +52,27 @@
                 android:layout_marginTop="16dp"/>
 
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#979797" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="8dp"
+            android:paddingBottom="@dimen/linear_bottom_margin">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/category2"
+                android:textSize="18sp"
                 android:textColor="@android:color/white"/>
 
             <net.qiujuer.genius.widget.GeniusSeekBar
                 android:id="@+id/seekBar2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingTop="5dp"
                 genius:g_allowTrackClickToDrag="false"
                 genius:g_indicatorBackgroundColor="#0cb45a"
                 genius:g_indicatorFormatter="%d"
@@ -71,8 +80,8 @@
                 genius:g_indicatorTextAppearance="@style/CustomFloaterTextAppearance"
                 genius:g_rippleColor="#0cb45a"
                 genius:g_scrubberColor="#00b153"
-                genius:g_thumbColor="#217f4d"
-                genius:g_trackColor="#ff925c"
+                genius:g_thumbColor="#6cfd6e"
+                genius:g_trackColor="#979797"
                 genius:g_tickSize="8sp"
                 genius:g_touchSize="12sp"
                 genius:g_thumbSize="10sp"
@@ -84,21 +93,27 @@
                 android:layout_marginTop="16dp"/>
 
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#979797" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="8dp"
+            android:paddingBottom="@dimen/linear_bottom_margin">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/category3"
+                android:textSize="18sp"
                 android:textColor="@android:color/white"/>
 
             <net.qiujuer.genius.widget.GeniusSeekBar
                 android:id="@+id/seekBar3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingTop="5dp"
                 genius:g_allowTrackClickToDrag="false"
                 genius:g_indicatorBackgroundColor="#0cb45a"
                 genius:g_indicatorFormatter="%d"
@@ -106,8 +121,8 @@
                 genius:g_indicatorTextAppearance="@style/CustomFloaterTextAppearance"
                 genius:g_rippleColor="#0cb45a"
                 genius:g_scrubberColor="#00b153"
-                genius:g_thumbColor="#217f4d"
-                genius:g_trackColor="#ff925c"
+                genius:g_thumbColor="#6cfd6e"
+                genius:g_trackColor="#979797"
                 genius:g_tickSize="8sp"
                 genius:g_touchSize="12sp"
                 genius:g_thumbSize="10sp"
@@ -119,21 +134,27 @@
                 android:layout_marginTop="16dp"/>
 
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#979797" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="8dp"
+            android:paddingBottom="@dimen/linear_bottom_margin">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/category4"
+                android:textSize="18sp"
                 android:textColor="@android:color/white"/>
 
             <net.qiujuer.genius.widget.GeniusSeekBar
                 android:id="@+id/seekBar4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingTop="5dp"
                 genius:g_allowTrackClickToDrag="false"
                 genius:g_indicatorBackgroundColor="#0cb45a"
                 genius:g_indicatorFormatter="%d"
@@ -141,8 +162,8 @@
                 genius:g_indicatorTextAppearance="@style/CustomFloaterTextAppearance"
                 genius:g_rippleColor="#0cb45a"
                 genius:g_scrubberColor="#00b153"
-                genius:g_thumbColor="#217f4d"
-                genius:g_trackColor="#ff925c"
+                genius:g_thumbColor="#6cfd6e"
+                genius:g_trackColor="#979797"
                 genius:g_tickSize="8sp"
                 genius:g_touchSize="12sp"
                 genius:g_thumbSize="10sp"
@@ -154,21 +175,27 @@
                 android:layout_marginTop="16dp"/>
 
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#979797" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="8dp"
+            android:paddingBottom="@dimen/linear_bottom_margin">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/category5"
+                android:textSize="18sp"
                 android:textColor="@android:color/white"/>
 
             <net.qiujuer.genius.widget.GeniusSeekBar
                 android:id="@+id/seekBar5"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingTop="5dp"
                 genius:g_allowTrackClickToDrag="false"
                 genius:g_indicatorBackgroundColor="#0cb45a"
                 genius:g_indicatorFormatter="%d"
@@ -176,8 +203,8 @@
                 genius:g_indicatorTextAppearance="@style/CustomFloaterTextAppearance"
                 genius:g_rippleColor="#0cb45a"
                 genius:g_scrubberColor="#00b153"
-                genius:g_thumbColor="#217f4d"
-                genius:g_trackColor="#ff925c"
+                genius:g_thumbColor="#6cfd6e"
+                genius:g_trackColor="#979797"
                 genius:g_tickSize="8sp"
                 genius:g_touchSize="12sp"
                 genius:g_thumbSize="10sp"
@@ -189,21 +216,27 @@
                 android:layout_marginTop="16dp"/>
 
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#979797" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="8dp"
+            android:paddingBottom="@dimen/linear_bottom_margin">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/category6"
+                android:textSize="18sp"
                 android:textColor="@android:color/white"/>
 
             <net.qiujuer.genius.widget.GeniusSeekBar
                 android:id="@+id/seekBar6"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingTop="5dp"
                 genius:g_allowTrackClickToDrag="false"
                 genius:g_indicatorBackgroundColor="#0cb45a"
                 genius:g_indicatorFormatter="%d"
@@ -211,8 +244,8 @@
                 genius:g_indicatorTextAppearance="@style/CustomFloaterTextAppearance"
                 genius:g_rippleColor="#0cb45a"
                 genius:g_scrubberColor="#00b153"
-                genius:g_thumbColor="#217f4d"
-                genius:g_trackColor="#ff925c"
+                genius:g_thumbColor="#6cfd6e"
+                genius:g_trackColor="#979797"
                 genius:g_tickSize="8sp"
                 genius:g_touchSize="12sp"
                 genius:g_thumbSize="10sp"
@@ -224,21 +257,27 @@
                 android:layout_marginTop="16dp"/>
 
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#979797" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="8dp"
+            android:paddingBottom="@dimen/linear_bottom_margin">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/category7"
+                android:textSize="18sp"
                 android:textColor="@android:color/white"/>
 
             <net.qiujuer.genius.widget.GeniusSeekBar
                 android:id="@+id/seekBar7"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingTop="5dp"
                 genius:g_allowTrackClickToDrag="false"
                 genius:g_indicatorBackgroundColor="#0cb45a"
                 genius:g_indicatorFormatter="%d"
@@ -246,8 +285,8 @@
                 genius:g_indicatorTextAppearance="@style/CustomFloaterTextAppearance"
                 genius:g_rippleColor="#0cb45a"
                 genius:g_scrubberColor="#00b153"
-                genius:g_thumbColor="#217f4d"
-                genius:g_trackColor="#ff925c"
+                genius:g_thumbColor="#6cfd6e"
+                genius:g_trackColor="#979797"
                 genius:g_tickSize="8sp"
                 genius:g_touchSize="12sp"
                 genius:g_thumbSize="10sp"
@@ -259,21 +298,27 @@
                 android:layout_marginTop="16dp"/>
 
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#979797" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="8dp"
+            android:paddingBottom="@dimen/linear_bottom_margin">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/category8"
+                android:textSize="18sp"
                 android:textColor="@android:color/white"/>
 
             <net.qiujuer.genius.widget.GeniusSeekBar
                 android:id="@+id/seekBar8"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingTop="5dp"
                 genius:g_allowTrackClickToDrag="false"
                 genius:g_indicatorBackgroundColor="#0cb45a"
                 genius:g_indicatorFormatter="%d"
@@ -281,8 +326,8 @@
                 genius:g_indicatorTextAppearance="@style/CustomFloaterTextAppearance"
                 genius:g_rippleColor="#0cb45a"
                 genius:g_scrubberColor="#00b153"
-                genius:g_thumbColor="#217f4d"
-                genius:g_trackColor="#ff925c"
+                genius:g_thumbColor="#6cfd6e"
+                genius:g_trackColor="#979797"
                 genius:g_tickSize="8sp"
                 genius:g_touchSize="12sp"
                 genius:g_thumbSize="10sp"
@@ -294,6 +339,16 @@
                 android:layout_marginTop="16dp"/>
 
         </LinearLayout>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/register_btn_complete"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/colored_button"
+            android:padding="12dp"
+            android:text="Next" />
 
     </LinearLayout>
 
