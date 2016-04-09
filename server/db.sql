@@ -43,13 +43,6 @@ CREATE TABLE `enrollments` (
     `datetime` DATETIME NOT NULL default '0000-00-00 00:00:00'
 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
-CREATE TABLE `supports` (
-    `course1` INT NOT NULL,
-    `course2` INT NOT NULL,
-    `both` INT NOT NULL default 0,
-    `order` INT NOT NULL default 0,
-    `prior` INT NOT NULL default 0
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 ALTER TABLE courses
 ADD FOREIGN KEY (author_name)
@@ -62,6 +55,15 @@ REFERENCES courses(id);
 ALTER TABLE enrollments
 ADD FOREIGN KEY (learner_id)
 REFERENCES learners(id);
+
+CREATE TABLE `supports` (
+    `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `course1` INT NOT NULL,
+    `course2` INT NOT NULL,
+    `both` INT NOT NULL default 0,
+    `order` INT NOT NULL default 0,
+    `prior` INT NOT NULL default 0
+) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 ALTER TABLE supports
 ADD FOREIGN KEY (course1)

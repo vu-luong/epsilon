@@ -95,7 +95,6 @@ Learners.getHistory = function(id, cb){
 			cb(err, null);
 		} else {
 			var idList = message;
-			console.log(idList);
 			Courses.getAllCourses(function(err, message){
 				if (err){
 					cb(err, null);
