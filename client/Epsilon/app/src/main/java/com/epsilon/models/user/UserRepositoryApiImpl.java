@@ -30,7 +30,7 @@ public class UserRepositoryApiImpl implements UserRepository {
 
 
     @Override
-    public void register(String username, String password, final SignUpResultCallBack callBack) {
+    public void register(String username, String password, int[] favorite, final SignUpResultCallBack callBack) {
 
     }
 

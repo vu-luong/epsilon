@@ -15,7 +15,7 @@ public interface RegisterContract {
     }
 
     interface UserActionListener {
-        void completeBasic();
+        void completeBasic(String username, String password);
         void register(String username, String password, int[] favoriteLevel);
     }
 }
