@@ -72,3 +72,20 @@ REFERENCES courses(id);
 ALTER TABLE supports
 ADD FOREIGN KEY (course2)
 REFERENCES courses(id);
+
+CREATE TABLE `blacklist` (
+    `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `course1` INT NOT NULL,
+    `course2` INT NOT NULL,
+) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
+ALTER TABLE blacklist
+ADD FOREIGN KEY (course1)
+REFERENCES courses(id);
+
+ALTER TABLE blacklist
+ADD FOREIGN KEY (course2)
+REFERENCES courses(id);
+
+ALTER TABLE blacklist
+ADD UNIQUE `something`(`course1`, `course2`);
