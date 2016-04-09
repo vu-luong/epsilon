@@ -2,6 +2,7 @@ var db = require('./db');
 var Learners = {};
 var Recommender = require('../utils/recommendEngine');
 var Courses = require('../models/courses');
+var Blacklist = require('../models/blacklist');
 var Enrollments = require('../models/enrollments');
 
 Learners.checkValidUsername = function(username, cb){
@@ -16,8 +17,9 @@ Learners.addLearner = function (learner, cb){
 	});
 }
 
-Learners.calRequirementRcms = function(category, cb){
+Learners.calRequirementRcms = function(learner_id, category, cb){
 	// scale
+
 	var TRIGGER_DEVIATION = 8; // TODO improve it
 	var deviation = 0;
 	var avg = 0;
@@ -40,7 +42,7 @@ Learners.calRequirementRcms = function(category, cb){
 			art: (parseInt(category.charAt(6)) >= avg)?9:0,
 			office: (parseInt(category.charAt(7)) >= avg)?9:0
 		}
-		Recommender.getRecommendations(requirement, function(err, message){
+		Learners.getAdvanceRecommendations(learner_id, requirement, function(err, message){
 			cb(err, message);
 		});
 	} else {
@@ -56,7 +58,7 @@ Learners.getRecommendations = function(id, cb){
 			cb(err, null);
 		} else {
 			var requirementStr = message[0].requirement_category;
-			Learners.calRequirementRcms(requirementStr, function(err, message){
+			Learners.calRequirementRcms(id, requirementStr, function(err, message){
 				cb(err, message);
 			});
 		}
@@ -114,6 +116,54 @@ Learners.getHistory = function(id, cb){
 					cb(null, res);
 				}
 			});
+		}
+	});
+}
+
+Learners.getAdvanceRecommendations = function (learner_id, requirement, cb){
+	Courses.getAllCourses(function(err, message){
+		if (err){
+			cb(err, null);
+		} else {
+			var subId = {};
+			var allCourses = message;
+			Learners.getHistory(learner_id, function(err, message){
+				if (err){
+					cb(err, null);
+				} else {
+					var history = message;
+					Blacklist.getAll(function(err, message){
+						if (err){
+							cb(err, null);
+						} else {
+							var blacklist = message;
+							// todo
+							for (var i = 0; i < history.length; i++){
+									hId = history[i].id;
+									subId[hId] = true;
+								}
+							for (var k = 0; k < blacklist.length; k++){
+								if (blacklist[k].course2 in subId){
+									subId[blacklist[k].course1] = true;
+								}
+							}
+							for (var j = allCourses.length - 1; j >= 0; j--){
+								var course = allCourses[j];
+								if (course.id in subId){
+									allCourses.splice(j, 1);
+								}
+							}
+							// console.log('allCourses length: ' + allCourses.length);
+							// for (var j = 0; j < allCourses.length; j++){
+							// 	console.log(allCourses[j].id);
+							// }
+							Recommender.getBasicRecommendations(allCourses, requirement, function(err, message){
+								cb(err, message);
+							});
+						}
+					});
+				}
+			});	
 		}
 	});
 }
