@@ -13,9 +13,11 @@ import android.widget.Toast;
 
 import com.epsilon.R;
 import com.epsilon.commons.GenericRetainedFragment;
+import com.epsilon.utils.Utils;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import utils.Injection;
 
 /**
  * Created by Dandoh on 4/9/16.
@@ -41,8 +43,7 @@ public class LoginFragment extends GenericRetainedFragment implements LoginContr
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        mUserActionListener = new LoginPresenter(this);
+        mUserActionListener = new LoginPresenter(this, Injection.provideUserRepository());
 
     }
 
@@ -61,6 +62,7 @@ public class LoginFragment extends GenericRetainedFragment implements LoginContr
 
     @OnClick(R.id.login_btn_login)
     void login() {
+        Utils.log(TAG, "on login");
         mUserActionListener.login(
                 mUsernameEditText.getText().toString(),
                 mPasswwordEditText.getText().toString()
@@ -90,6 +92,11 @@ public class LoginFragment extends GenericRetainedFragment implements LoginContr
     @Override
     public void displayLoginSucceed() {
         // TODO
+    }
+
+    @Override
+    public void displayLoginError(String message) {
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
