@@ -24,13 +24,35 @@ Courses.getAllCourses(function(err, message){
 		}
 		var requirement = {
 			it: 0,
-			business: 9,
-			english: 9,
+			business: 0,
+			english: 0,
 			skill: 0,
 			family: 0,
 			health: 0,
 			art: 0,
 			office: 0
+		}
+
+		var requirement9 = {
+			it: 9,
+			business: 9,
+			english: 9,
+			skill: 9,
+			family: 9,
+			health: 9,
+			art: 9,
+			office: 9
+		}
+
+		var requirement5 = {
+			it: 5,
+			business: 5,
+			english: 5,
+			skill: 5,
+			family: 5,
+			health: 5,
+			art: 5,
+			office: 5
 		}
 
 		var options = {
@@ -39,7 +61,7 @@ Courses.getAllCourses(function(err, message){
 		  standardize: false
 		}
 
-		var res = alike(requirement, courses, options);
+		var res = alike(requirement5, courses, options);
 		console.log("Top " + options.k + " courses for you:");
 		var course;
 		for (var i = 0; i < res.length; i++){

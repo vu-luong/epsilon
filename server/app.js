@@ -20,6 +20,9 @@ var categoriesController = require('./controllers/categoriesController');
 
 // cross domain config
 app.use(function (req, res, next) {
+    console.log('Client request:');
+    console.log(req.body);
+    console.log('--------------');
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
