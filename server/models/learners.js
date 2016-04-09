@@ -2,6 +2,7 @@ var db = require('./db');
 var Learners = {};
 var Recommender = require('../utils/recommendEngine');
 var Courses = require('../models/courses');
+var Enrollments = require('../models/enrollments');
 
 Learners.checkValidUsername = function(username, cb){
 	db.query('SELECT * FROM learners WHERE username = ?', username, function(err, message){
@@ -86,6 +87,36 @@ Learners.logout = function(id, cb){
 	        [{token: null}, {id: id}], function(err, message){
 	        	cb(err, message);
 	    });
+}
+
+Learners.getHistory = function(id, cb){
+	Enrollments.getByLearnerId(id, function(err, message){
+		if (err){
+			cb(err, null);
+		} else {
+			var idList = message;
+			console.log(idList);
+			Courses.getAllCourses(function(err, message){
+				if (err){
+					cb(err, null);
+				} else {
+					var res = [];
+					rawCourses = message;
+					var courseHasID = {};
+					// build tree
+					var courses = [];
+					for (var i = 0; i < rawCourses.length; i++){
+						courseHasID[rawCourses[i].id] = rawCourses[i];
+					}
+
+					for (var i = 0; i < idList.length; i++){
+						res.push(courseHasID[idList[i].course_id]);
+					}
+					cb(null, res);
+				}
+			});
+		}
+	});
 }
 
 module.exports = Learners;
