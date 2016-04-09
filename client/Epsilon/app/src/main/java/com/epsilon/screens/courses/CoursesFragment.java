@@ -3,6 +3,8 @@ package com.epsilon.screens.courses;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -37,6 +39,9 @@ public class CoursesFragment extends GenericRetainedFragment implements CoursesC
     RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
 
+    @Bind(R.id.courses_refresh_layout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +62,22 @@ public class CoursesFragment extends GenericRetainedFragment implements CoursesC
         super.onViewCreated(view, savedInstanceState);
 
         setUpList();
+        setUpSwipeRefreshLayout();
+    }
+
+    private void setUpSwipeRefreshLayout() {
+
+        mSwipeRefreshLayout.setColorSchemeColors(
+                ContextCompat.getColor(getActivity(), R.color.colorPrimary),
+                ContextCompat.getColor(getActivity(), R.color.colorAccent),
+                ContextCompat.getColor(getActivity(), R.color.colorPrimaryDark));
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Load request, force update
+                mUserActionListener.getMyCourses();
+            }
+        });
     }
 
     private void setUpList() {
@@ -89,5 +110,26 @@ public class CoursesFragment extends GenericRetainedFragment implements CoursesC
     @Override
     public void onClick(int position, Course course) {
         mUserActionListener.viewCourseDetail(position, course);
+    }
+
+    @Override
+    protected void showLoading() {
+        isProcessing = true;
+        if (mSwipeRefreshLayout != null) {
+            mSwipeRefreshLayout.post(new Runnable() {
+                @Override
+                public void run() {
+                    mSwipeRefreshLayout.setRefreshing(true);
+                }
+            });
+        }
+    }
+
+    @Override
+    protected void dismissLoading() {
+        isProcessing = false;
+        if (mSwipeRefreshLayout != null) {
+            mSwipeRefreshLayout.setRefreshing(false);
+        }
     }
 }
