@@ -40,6 +40,25 @@ public class CourseDetailPresenter implements CourseDetailContract.UserActionLis
     }
 
     @Override
+    public void enrollCourse() {
+
+        if (mCurrentCourse.isLearned()) return;
+
+        mCourseRepository.enrollCourse(mCurrentCourse.getId(), new CourseRepository.EnrollCourseCallBack() {
+            @Override
+            public void onSucceed() {
+
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                mView.onError(errorMessage);
+            }
+        });
+
+    }
+
+    @Override
     public void goToCourse() {
         if (mCurrentCourse != null)
             mView.goToCourseUrl(mCurrentCourse.getLink());

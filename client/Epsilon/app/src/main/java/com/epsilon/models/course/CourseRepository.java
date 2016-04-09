@@ -29,4 +29,10 @@ public interface CourseRepository {
 
 
     void getRecommendedCourseByHistory(CoursesListResultCallBack callBack);
+
+    void enrollCourse(int courseId, EnrollCourseCallBack callBack);
+
+    interface EnrollCourseCallBack extends GenericCallback {
+        void onSucceed();
+    }
 }
