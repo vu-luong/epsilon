@@ -142,6 +142,25 @@ router.get('/recommendations', function(req, res){
 	});
 });
 
+router.get('/recommendations_user', function(req, res){
+	var id = req.headers.id;
+	Learners.getCommonCoursesOfKnn(id, function(err, message){
+		if (err){
+			console.log('Error when get recommendations');
+			console.log(err);
+			res.json({
+				status: 'error',
+				error: "Lỗi không xác định"
+			});
+		} else {
+			res.json({
+				status: 'success',
+				message: message
+			});
+		}
+	});
+});
+
 router.post('/enroll', function(req, res){
 	var learner_id = req.headers.id;
 	var course_id = req.body.course_id;
@@ -217,4 +236,5 @@ router.get('/history', function(req, res){
 		}
 	});
 });
+
 module.exports = router;
