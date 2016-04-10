@@ -231,6 +231,7 @@ Learners.updateCombinedCategory = function(course_id, id, cb){
 
 Learners.getCommonCoursesOfKnn = function(id, cb){
 	var userBasedCourses = [];
+	var myId = id;
 	Learners.findById(id, function(err, message){
 		if (err){
 			cb(err, null);
@@ -271,12 +272,25 @@ Learners.getCommonCoursesOfKnn = function(id, cb){
 									count++;
 								}
 								if (count == KNN_MAX){
-									for (var i in countHistory){
-										if (countHistory[i] >= USERBASED_TRIGGER && userBasedCourses.length < USERBASED_MAX) {
-											userBasedCourses.push(topHistory[i]);
+									Learners.getHistory(myId, function(err, message){
+										if (err){
+											cb(err, null);
+										} else {
+											var history = message;
+											var learned = {};
+											for (var i = 0; i < history.length; i++){
+												learned[history[i].id] = true;
+											}
+											for (var i in countHistory){
+												if (countHistory[i] >= USERBASED_TRIGGER && userBasedCourses.length < USERBASED_MAX) {
+													if (learned[i]) continue;
+													userBasedCourses.push(topHistory[i]);
+												}
+											}
+											cb(null, userBasedCourses);
 										}
-									}
-									cb(null, userBasedCourses);
+									});
+									
 								}
 							});
 						}
