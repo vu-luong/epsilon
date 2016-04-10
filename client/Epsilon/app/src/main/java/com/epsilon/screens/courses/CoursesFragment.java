@@ -18,6 +18,7 @@ import com.epsilon.customview.GridSpacingItemDecoration;
 import com.epsilon.models.entities.Course;
 import com.epsilon.screens.categorydetail.CourseListAdapter;
 import com.epsilon.screens.coursedetail.CourseDetailActivity;
+import com.epsilon.utils.Utils;
 
 import java.util.List;
 
@@ -114,19 +115,21 @@ public class CoursesFragment extends GenericRetainedFragment implements CoursesC
 
     @Override
     protected void showLoading() {
+
+        if (mSwipeRefreshLayout == null || mSwipeRefreshLayout.isRefreshing()) return;
+        Utils.log(TAG, "Show loading");
         isProcessing = true;
-        if (mSwipeRefreshLayout != null) {
-            mSwipeRefreshLayout.post(new Runnable() {
-                @Override
-                public void run() {
-                    mSwipeRefreshLayout.setRefreshing(true);
-                }
-            });
-        }
+        mSwipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(true);
+            }
+        });
     }
 
     @Override
     protected void dismissLoading() {
+        Utils.log(TAG, "Dismiss loading");
         isProcessing = false;
         if (mSwipeRefreshLayout != null) {
             mSwipeRefreshLayout.setRefreshing(false);

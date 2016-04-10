@@ -18,18 +18,20 @@ public class GenericRetainedFragment extends GenericFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setRetainInstance(true);
         Utils.log(TAG, "onCreate");
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        setRetainInstance(true);
+
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+
+        Utils.log(TAG, "onViewCreated");
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
         mProgressDialog = new ProgressDialog(getActivity());
@@ -42,9 +44,18 @@ public class GenericRetainedFragment extends GenericFragment {
 
     @Override
     public void onDestroyView() {
+
+
         super.onDestroyView();
         mProgressDialog = null;
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        Utils.log(TAG, "onDestroy");
     }
 
     protected void showLoading() {
@@ -74,5 +85,7 @@ public class GenericRetainedFragment extends GenericFragment {
             dismissLoading();
         }
     }
+
+
 
 }

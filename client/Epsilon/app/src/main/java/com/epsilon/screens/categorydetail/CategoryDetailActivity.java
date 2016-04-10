@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentActivity;
 
 import com.epsilon.R;
 import com.epsilon.commons.GenericActivity;
+import com.epsilon.screens.login.LoginFragment;
 
 /**
  * Created by AnhVu on 4/9/16.
@@ -18,7 +19,8 @@ public class CategoryDetailActivity extends GenericActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_holder);
-        initFragment(CategoryDetailFragment.getInstance(getIntent().getIntExtra(CATEGORY_ID_KEY, 1)));
+        if (savedInstanceState == null)
+            initFragment(CategoryDetailFragment.getInstance(getIntent().getIntExtra(CATEGORY_ID_KEY, 1)));
     }
 
     public static Intent makeIntent(Context context, int categoryId) {

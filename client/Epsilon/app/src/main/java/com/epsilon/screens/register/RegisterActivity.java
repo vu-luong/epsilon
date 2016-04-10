@@ -17,7 +17,8 @@ public class RegisterActivity extends GenericActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_holder);
-        initFragment(RegisterFragment.getInstance());
+        if (savedInstanceState == null)
+            initFragment(RegisterFragment.getInstance());
     }
 
     public static Intent makeIntent(Context context) {

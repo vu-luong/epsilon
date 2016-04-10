@@ -13,8 +13,7 @@ public class LoginActivity extends GenericActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_holder);
-
-
-        initFragment(LoginFragment.getInstace());
+        if (savedInstanceState == null)
+            initFragment(LoginFragment.getInstace());
     }
 }
