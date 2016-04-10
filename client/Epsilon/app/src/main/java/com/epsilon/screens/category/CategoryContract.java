@@ -12,13 +12,13 @@ public interface CategoryContract {
 
     interface View extends GenericViewInterface{
         void displayAllCategory(List<Category> categories);
-        void goToCategoryCoursesScreen(int categoryId);
+        void goToCategoryCoursesScreen(int categoryId, Category category);
         void onError(String errorMessage);
     }
 
     interface UserActionListener {
         void getAllCategory();
-        void viewCoursesOfCategory(int categoryId);
+        void viewCoursesOfCategory(int categoryId, Category category);
 
     }
 }

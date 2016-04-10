@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,6 @@ import com.epsilon.commons.GenericRetainedFragment;
 import com.epsilon.customview.GridSpacingItemDecoration;
 import com.epsilon.models.entities.Category;
 import com.epsilon.screens.categorydetail.CategoryDetailActivity;
-import com.epsilon.utils.Utils;
 
 import java.util.List;
 
@@ -83,8 +81,8 @@ public class CategoryFragment extends GenericRetainedFragment implements Categor
     }
 
     @Override
-    public void goToCategoryCoursesScreen(int categoryId) {
-        Intent intent = CategoryDetailActivity.makeIntent(getActivity(), categoryId);
+    public void goToCategoryCoursesScreen(int categoryId, Category category) {
+        Intent intent = CategoryDetailActivity.makeIntent(getActivity(), categoryId, category.getName());
         startActivity(intent);
     }
 
@@ -95,6 +93,6 @@ public class CategoryFragment extends GenericRetainedFragment implements Categor
 
     @Override
     public void onClick(int position, Category category) {
-        mUserActionListener.viewCoursesOfCategory(category.getId());
+        mUserActionListener.viewCoursesOfCategory(category.getId(), category);
     }
 }
