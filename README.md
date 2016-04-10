@@ -25,6 +25,9 @@ Using a clean, maintainable MVP software architecture for Android application.
   + Build and run
 
 ## Third party libraries used in project 
++ Server side :
+
++ Client side :
   + https://github.com/blipinsk/RecyclerViewHeader
   + https://github.com/qiujuer/Genius-Android
   + https://github.com/square/picasso
