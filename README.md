@@ -23,4 +23,10 @@ Using a clean, maintainable MVP software architecture for Android application.
   + Import project Epsilon in client folder as a Android Studio project
   + Change API_URL in file utils/Constance.java to address and port from server side;
   + Build and run
+
+## Third party used in project 
+  + https://github.com/blipinsk/RecyclerViewHeader
+  + https://github.com/qiujuer/Genius-Android
+  + https://github.com/square/picasso
+  + http://jakewharton.github.io/butterknife/
       
