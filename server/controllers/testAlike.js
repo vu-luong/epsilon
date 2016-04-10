@@ -1,4 +1,5 @@
 var Courses = require('../models/courses');
+var Learners = require('../models/learners');
 var alike = require('alike');
 var Recommender = require('../utils/recommendEngine');
 
@@ -6,14 +7,21 @@ var rawCourses;
 
 var requirement = {
 	it: 9,
-	business: 9,
-	english: 0,
+	business: 0,
+	english: 9,
 	skill: 0,
 	family: 0,
 	health: 0,
-	art: 3,
+	art: 0,
 	office: 0
 }
+
+Learners.getCommonCoursesOfKnn(9, function(err, message){
+
+});
+
+return;
+
 
 
 Recommender.getRecommendations(requirement, function(err, message){

@@ -117,7 +117,7 @@ public class CourseRepositoryApiImpl implements CourseRepository {
     public void getUserBasedRecommendedCourseByHistory(final CoursesListResultCallBack callBack) {
 
         //TODO
-        ServiceGenerator.getEpsilonWebService().getFavoriteRecommendedCourseByHistory()
+        ServiceGenerator.getEpsilonWebService().getUserBasedRecommendedCourse()
                 .enqueue(new GenericRetrofitCallback<CoursesListResultJSON>() {
                     @Override
                     protected void onSucceed(CoursesListResultJSON result) {

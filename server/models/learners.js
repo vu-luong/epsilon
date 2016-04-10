@@ -1,5 +1,10 @@
+var KNN_MAX = 5;
+var USERBASED_MAX = 5;
+var USERBASED_TRIGGER = 2;
+
 var db = require('./db');
 var Learners = {};
+var alike = require('alike');
 var Recommender = require('../utils/recommendEngine');
 var Courses = require('../models/courses');
 var Blacklist = require('../models/blacklist');
@@ -57,6 +62,10 @@ Learners.getRecommendations = function(id, cb){
 		if (err){
 			cb(err, null);
 		} else {
+			if (message.length < 1){
+				console.log('wrong id');
+				return;
+			}
 			var requirement_category = message[0].requirement_category;
 			var requirementStr;
 			var combined_category = message[0].combined_category;
@@ -77,6 +86,12 @@ Learners.getRecommendations = function(id, cb){
 
 Learners.findByUsername = function(username, cb){
 	db.query('SELECT * FROM learners WHERE username = ?', username, function(err, message){
+		cb(err, message);
+	});
+}
+
+Learners.getAll = function(cb){
+	db.query('SELECT * FROM learners', function(err, message){
 		cb(err, message);
 	});
 }
@@ -213,4 +228,103 @@ Learners.updateCombinedCategory = function(course_id, id, cb){
 		}
 	});
 }
+
+Learners.getCommonCoursesOfKnn = function(id, cb){
+	var userBasedCourses = [];
+	Learners.findById(id, function(err, message){
+		if (err){
+			cb(err, null);
+		} else {
+			if (message.length > 0){
+				var category = message[0].requirement_category;
+				var requirement = {
+					it: parseInt(category.charAt(0)),
+					business: parseInt(category.charAt(1)),
+					english: parseInt(category.charAt(2)),
+					skill: parseInt(category.charAt(3)),
+					family: parseInt(category.charAt(4)),
+					health: parseInt(category.charAt(5)),
+					art: parseInt(category.charAt(6)),
+					office: parseInt(category.charAt(7))
+				}
+				Learners.getKnn(id, requirement, function(err, message){
+					if (err){
+						cb(err, null);
+					} else {
+						var count = 0;
+						var topHistory = {};
+						var countHistory = {};
+						for (var i = 0; i < message.length; i++){
+							Learners.getHistory(message[i], function(err, message){
+								if (err){
+									count++;
+									console.log('err when get knn history');
+									console.log(err);
+								} else {
+									for (var j = 0; j < message.length; j++){
+										topHistory[message[j].id] = message[j];
+										if (message[j].id in countHistory){
+											countHistory[message[j].id] += 1;
+										} else 
+											countHistory[message[j].id] = 1;
+									}
+									count++;
+								}
+								if (count == KNN_MAX){
+									for (var i in countHistory){
+										if (countHistory[i] >= USERBASED_TRIGGER && userBasedCourses.length < USERBASED_MAX) {
+											userBasedCourses.push(topHistory[i]);
+										}
+									}
+									cb(null, userBasedCourses);
+								}
+							});
+						}
+					}
+				});
+			} else {
+				cb('Id người dùng sai', null);
+			} 
+		}
+	});
+}
+
+Learners.getKnn = function(id, requirement, cb){
+	Learners.getAll(function(err, message){
+		if (err){
+			cb(err, null);
+		} else {
+			var learners = message;
+			var learnersIdList = [];
+			var requirements = [];
+			for (var i = 0; i < learners.length; i++){
+				var learner = learners[i];
+				if (learner.id == id) continue;
+				var category = learner.requirement_category;
+				requirements.push({
+					id: learner.id,
+					it: parseInt(category.charAt(0)),
+					business: parseInt(category.charAt(1)),
+					english: parseInt(category.charAt(2)),
+					skill: parseInt(category.charAt(3)),
+					family: parseInt(category.charAt(4)),
+					health: parseInt(category.charAt(5)),
+					art: parseInt(category.charAt(6)),
+					office: parseInt(category.charAt(7))
+				});
+			}
+				var options = {
+				  k: KNN_MAX, 
+				  debug: false,
+				  standardize: false
+				}
+				var knn = alike(requirement, requirements, options);
+				for (var i = 0; i < knn.length; i++){
+					learnersIdList.push(knn[i].id);
+				}
+				cb(null, learnersIdList);
+		}
+	});
+}
+
 module.exports = Learners;

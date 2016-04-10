@@ -1,4 +1,4 @@
-var TOP_COURSES_NUMBER = 10;
+var TOP_COURSES_NUMBER = 5;
 var db = require('./db');
 var alike = require('alike');
 var Courses = {};

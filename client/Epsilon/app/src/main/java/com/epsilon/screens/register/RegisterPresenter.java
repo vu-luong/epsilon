@@ -5,6 +5,8 @@ import android.text.TextUtils;
 import com.epsilon.models.user.UserRepository;
 import com.epsilon.utils.Validator;
 
+import org.w3c.dom.Text;
+
 /**
  * Created by Dandoh on 4/9/16.
  */
@@ -19,7 +21,7 @@ public class RegisterPresenter implements RegisterContract.UserActionListener {
     }
 
     @Override
-    public void completeBasic(String username, String password) {
+    public void completeBasic(String username, String password, String repassword) {
         if (TextUtils.isEmpty(username) || !Validator.isUsernameValid(username)) {
             mRegisterView.displayErrorUsername();
             return;
@@ -28,6 +30,11 @@ public class RegisterPresenter implements RegisterContract.UserActionListener {
 
         if (TextUtils.isEmpty(password) || !Validator.isPasswordValid(password)) {
             mRegisterView.displayErrorPassword();
+            return;
+        }
+
+        if (!password.equals(repassword)) {
+            mRegisterView.displayPasswordNotMatchError();
             return;
         }
 

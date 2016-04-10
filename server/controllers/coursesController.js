@@ -7,7 +7,7 @@ var Recommender = require('../utils/recommendEngine');
 
 router.get('/:id', function(req, res){
 	var id = req.params.id;
-	var learner_id = req.headers.learner_id;
+	var learner_id = req.headers.id;
 	Courses.getCourse(id, function(err, message){
 		if (err){
 			console.log('error when get course by id 1');

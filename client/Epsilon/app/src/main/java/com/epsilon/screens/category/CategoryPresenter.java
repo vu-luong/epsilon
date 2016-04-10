@@ -1,7 +1,5 @@
 package com.epsilon.screens.category;
 
-import com.epsilon.EpsilonApplication;
-import com.epsilon.R;
 import com.epsilon.models.category.CategoryRepository;
 import com.epsilon.models.entities.Category;
 
@@ -36,7 +34,7 @@ public class CategoryPresenter implements CategoryContract.UserActionListener{
     }
 
     @Override
-    public void viewCoursesOfCategory(int categoryId) {
-        mCategoryView.goToCategoryCoursesScreen(categoryId);
+    public void viewCoursesOfCategory(int categoryId, Category category) {
+        mCategoryView.goToCategoryCoursesScreen(categoryId, category);
     }
 }
