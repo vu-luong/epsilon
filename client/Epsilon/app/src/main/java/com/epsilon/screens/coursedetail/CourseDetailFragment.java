@@ -78,7 +78,6 @@ public class CourseDetailFragment extends GenericRetainedToolbarFragment
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_course_detail, container, false);
-
     }
 
     @Override
@@ -107,10 +106,15 @@ public class CourseDetailFragment extends GenericRetainedToolbarFragment
         mDescriptionTextView.setText(course.getDescription());
 
         mUserActionListener.getRecommendedCourse(course.getId());
+
+        if (course.isLearned()) mGoToCourseButton.setText("VÀO LỚP");
+            else mGoToCourseButton.setText("ĐẾN KHÓA HỌC");
+
     }
 
     @OnClick(R.id.coursedetail_btn_gotocourse)
     void onGoToCourseClick() {
+        mUserActionListener.enrollCourse();
         mUserActionListener.goToCourse();
     }
 

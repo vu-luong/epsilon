@@ -20,6 +20,7 @@ public interface CourseDetailContract {
 
     interface UserActionListener {
         void getCourseDetailById(int id);
+        void enrollCourse();
         void goToCourse();
         void getRecommendedCourse(int courseId);
     }

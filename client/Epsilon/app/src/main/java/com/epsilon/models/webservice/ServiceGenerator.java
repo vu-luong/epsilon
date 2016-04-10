@@ -132,4 +132,8 @@ public class ServiceGenerator {
 
         return mEpsilonMainService;
     }
+
+    public static void resetService() {
+        mEpsilonMainService = null;
+    }
 }

@@ -57,10 +57,20 @@ Learners.getRecommendations = function(id, cb){
 		if (err){
 			cb(err, null);
 		} else {
-			var requirementStr = message[0].requirement_category;
+			var requirement_category = message[0].requirement_category;
+			var requirementStr;
+			var combined_category = message[0].combined_category;
+			console.log(combined_category);
+			if (combined_category === "00000000"){
+			 	requirementStr = requirement_category;
+			} else {
+			 	requirementStr = combined_category;
+			}
+			console.log(requirementStr);
 			Learners.calRequirementRcms(id, requirementStr, function(err, message){
 				cb(err, message);
 			});
+
 		}
 	});
 }
@@ -168,4 +178,39 @@ Learners.getAdvanceRecommendations = function (learner_id, requirement, cb){
 	});
 }
 
+Learners.updateCombinedCategory = function(course_id, id, cb){
+	Courses.getCourse(course_id, function(err, message){
+		if (err){
+			cb(err, null);
+		} else {
+			if (message.length > 0){
+				var category = message[0].category;
+				Learners.findById(id, function(err, message){
+					if (err){
+						cb(err, null);
+					} else {
+						if (message.length > 0){
+							var result_category = '';
+							var combined_category = message[0].combined_category;
+							for (var i = 0; i < combined_category.length; i++){
+								result_category += ((combined_category[i] > category[i]) ?combined_category[i]:category[i]);
+							}
+							var learner = {
+								combined_category: result_category
+							}
+							db.query('UPDATE learners SET ? WHERE ?',
+					        [learner, {id: id}], function(err, message){
+								cb(err, message);
+					    	});
+						} else {
+							cb('Không tìm thầy người dùng', null);
+						}
+					}
+				});
+			} else {
+				cb('Không tìm thấy khoá học', null);
+			}
+		}
+	});
+}
 module.exports = Learners;

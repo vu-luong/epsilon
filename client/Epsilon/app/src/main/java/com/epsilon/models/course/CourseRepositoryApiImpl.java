@@ -5,6 +5,8 @@ import com.epsilon.models.entities.Course;
 import com.epsilon.models.webservice.ServiceGenerator;
 import com.epsilon.models.webservice.json.CourseResultJSON;
 import com.epsilon.models.webservice.json.CoursesListResultJSON;
+import com.epsilon.models.webservice.json.EnrollRequestJSON;
+import com.epsilon.models.webservice.json.GenericResultJSON;
 
 import java.util.HashMap;
 import java.util.List;
@@ -116,4 +118,22 @@ public class CourseRepositoryApiImpl implements CourseRepository {
                     }
                 });
     }
+
+    @Override
+    public void enrollCourse(int courseId, final EnrollCourseCallBack callBack) {
+        ServiceGenerator.getEpsilonWebService()
+                .enrollCourse(new EnrollRequestJSON(courseId))
+                .enqueue(new GenericRetrofitCallback<GenericResultJSON>() {
+                    @Override
+                    protected void onSucceed(GenericResultJSON result) {
+                        callBack.onSucceed();
+                    }
+
+                    @Override
+                    protected void onError(String message) {
+                        callBack.onError(message);
+                    }
+                });
+    }
+
 }
