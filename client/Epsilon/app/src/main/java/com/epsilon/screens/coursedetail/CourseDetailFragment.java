@@ -125,12 +125,9 @@ public class CourseDetailFragment extends GenericRetainedToolbarFragment
 
     @Override
     public void goToCourseUrl(String url) {
-        Intent mainIntent = MainActivity.makeIntent(getActivity(), MainActivity.COURSES_TAB_POSITION);
+        Intent mainIntent = MainActivity.makeIntent(getActivity(),
+                true, url);
         startActivity(mainIntent);
-
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        startActivity(browserIntent);
-
     }
 
     @Override
