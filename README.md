@@ -21,7 +21,7 @@ Using a clean, maintainable MVP software architecture for Android application.
 
 + Client side :
   + Import project Epsilon in client folder as a Android Studio project
-  + Change API_URL in file utils/Constance.java to address and port from server side;
+  + Change API_URL in file utils/Constants.java to address and port from server side;
   + Build and run
 
 ## Third party libraries used in project 
