@@ -57,6 +57,10 @@ Learners.getRecommendations = function(id, cb){
 		if (err){
 			cb(err, null);
 		} else {
+			if (message.length < 1){
+				console.log('wrong id');
+				return;
+			}
 			var requirement_category = message[0].requirement_category;
 			var requirementStr;
 			var combined_category = message[0].combined_category;
@@ -77,6 +81,12 @@ Learners.getRecommendations = function(id, cb){
 
 Learners.findByUsername = function(username, cb){
 	db.query('SELECT * FROM learners WHERE username = ?', username, function(err, message){
+		cb(err, message);
+	});
+}
+
+Learners.getAll = function(cb){
+	db.query('SELECT * FROM learners', function(err, message){
 		cb(err, message);
 	});
 }
@@ -213,4 +223,43 @@ Learners.updateCombinedCategory = function(course_id, id, cb){
 		}
 	});
 }
+
+Learners.getCommonCoursesOfKnn = function(id, cb){
+	Leaners.findById(id, function(err, message){
+		if (err){
+			cb(err, null);
+		} else {
+			if (message.length > 0){
+				var category = message[0].requirement_category;
+				var requirement = {
+					it: parseInt(category.charAt(0)),
+					business: parseInt(category.charAt(1)),
+					english: parseInt(category.charAt(2)),
+					skill: parseInt(category.charAt(3)),
+					family: parseInt(category.charAt(4)),
+					health: parseInt(category.charAt(5)),
+					art: parseInt(category.charAt(6)),
+					office: parseInt(category.charAt(7))
+				}
+
+			} else {
+				cb('Id người dùng sai', null);
+			} 
+		}
+	});
+}
+
+Learners.getKnn = function(id, requirement, cb){
+	Learners.getAll(function(err, message){
+		if (err){
+			cb(err, null);
+		} else {
+			var learners = message;
+			for (var i = 0; i < learners.length; i++){
+
+			}
+		}
+	});
+}
+
 module.exports = Learners;
