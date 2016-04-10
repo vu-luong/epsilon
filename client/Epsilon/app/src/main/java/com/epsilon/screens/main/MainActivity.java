@@ -29,6 +29,15 @@ public class MainActivity extends AppCompatActivity {
                 .putExtra(TAB_POSITION_KEY, tabPosition);
     }
 
+    public static Intent makeIntent(Context context, int tabPosition, boolean isClearTop) {
+        return new Intent(context, MainActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                .putExtra(TAB_POSITION_KEY, tabPosition);
+    }
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -19,6 +19,8 @@
     <string name="premium">Premium</string>
     <string name="enroll">ĐẾN KHÓA HỌC</string>
     <string name="course_overview_demo">Demo</string>
+    <string name="go_to_course">ĐẾN KHOÁ HỌC</string>
+    <string name="go_to_class">VÀO LỚP HỌC</string>
 
     <string-array name="category_colors">
         <item>#EDD7C7</item>
