@@ -14,8 +14,13 @@ Using a clean, maintainable MVP software architecture for Android application.
 
 ## Run project 
 + Server side :
+  + Run mysql server and import data in epsilon_db.sql
   + Install npm and run command :
       - npm install;
       - npm start;
-  
+
++ Client side :
+  + Import project Epsilon in client folder as a Android Studio project
+  + Change API_URL in file utils/Constance.java to address and port from server side;
+  + Build and run
       
