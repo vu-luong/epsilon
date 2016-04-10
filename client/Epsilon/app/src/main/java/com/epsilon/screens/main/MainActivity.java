@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     public static String POSITION = "POSITION";
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private String[] mTitles = new String[] {"Đã tham gia", "Khám phá", "Gợi ý"};
 
     public static Intent makeIntent(Context context, int tabPosition) {
         return new Intent(context, MainActivity.class)
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             int tabPosition = getIntent().getIntExtra(TAB_POSITION_KEY, 0);
             goToTab(tabPosition);
+            setTitle(mTitles[tabPosition]);
 
             if (getIntent().getBooleanExtra(IS_FROM_COURSE_KEY, false)) {
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(
@@ -87,7 +89,30 @@ public class MainActivity extends AppCompatActivity {
 
         // Give the TabLayout the ViewPager
         tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
-        tabLayout.setupWithViewPager(viewPager);
+        if (tabLayout != null) {
+            tabLayout.setupWithViewPager(viewPager);
+        }
+
+        tabLayout.setOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager) {
+
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                super.onTabSelected(tab);
+                setTitle(mTitles[tab.getPosition()]);
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                super.onTabUnselected(tab);
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                super.onTabReselected(tab);
+            }
+        });
+
+
     }
 
 
@@ -101,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         viewPager.setCurrentItem(savedInstanceState.getInt(POSITION));
+        setTitle(mTitles[savedInstanceState.getInt(POSITION)]);
     }
 
 

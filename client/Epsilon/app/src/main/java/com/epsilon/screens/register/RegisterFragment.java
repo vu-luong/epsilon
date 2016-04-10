@@ -56,6 +56,9 @@ public class RegisterFragment extends GenericRetainedToolbarFragment implements 
     @Bind(R.id.seekBar8)
     GeniusSeekBar mSeekBar8;
 
+    @Bind(R.id.register_edt_repassword)
+    EditText mRepasswordEditText;
+
 
     private int mCurrentScreenIndex = 1; // begin screen
 
@@ -103,8 +106,8 @@ public class RegisterFragment extends GenericRetainedToolbarFragment implements 
             });
         }
 
-        mPasswordEditText.setOnFocusChangeListener(this);
-        mUsernameEditText.setOnFocusChangeListener(this);
+//        mPasswordEditText.setOnFocusChangeListener(this);
+//        mUsernameEditText.setOnFocusChangeListener(this);
 
         setUpSignUpWizardView();
         setUpSeekBars();
@@ -144,7 +147,7 @@ public class RegisterFragment extends GenericRetainedToolbarFragment implements 
     @OnClick(R.id.register_btn_next)
     void completeBasic() {
         mUserActionListener.completeBasic(mUsernameEditText.getText().toString(),
-                mPasswordEditText.getText().toString());
+                mPasswordEditText.getText().toString(), mRepasswordEditText.getText().toString());
     }
 
     @OnClick(R.id.register_btn_complete)
@@ -177,9 +180,9 @@ public class RegisterFragment extends GenericRetainedToolbarFragment implements 
     }
 
     private void hideKeyboard(View view) {
-        InputMethodManager inputMethodManager = (InputMethodManager) getActivity()
-                .getSystemService(Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        getActivity().getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
     }
 
     @Override
@@ -226,7 +229,14 @@ public class RegisterFragment extends GenericRetainedToolbarFragment implements 
     }
 
     @Override
+    public void displayPasswordNotMatchError() {
+        Toast.makeText(getActivity(), "Password not matched", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void onFocusChange(View v, boolean hasFocus) {
+
+        Utils.log(TAG, "Calling this " + hasFocus);
         if (!hasFocus) {
             hideKeyboard(v);
         }

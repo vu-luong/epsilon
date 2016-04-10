@@ -110,10 +110,10 @@ public class CourseDetailFragment extends GenericRetainedToolbarFragment
         mUserActionListener.getRecommendedCourse(course.getId());
 
 
-        Utils.log(TAG, course.isLearned() + " ");
-
         if (course.isLearned()) mGoToCourseButton.setText(R.string.go_to_class);
         else mGoToCourseButton.setText(R.string.go_to_course);
+
+        getActivity().setTitle(course.getTitle());
 
     }
 

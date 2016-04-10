@@ -14,10 +14,12 @@ public interface RegisterContract {
         void goToMainScreen();
         void displayRegisterSucceed();
         void displayRegisterError(String errorMessage);
+
+        void displayPasswordNotMatchError();
     }
 
     interface UserActionListener {
-        void completeBasic(String username, String password);
+        void completeBasic(String username, String password, String repassword);
         void register(String username, String password, int[] favoriteLevel);
     }
 }
