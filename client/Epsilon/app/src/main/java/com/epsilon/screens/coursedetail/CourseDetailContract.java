@@ -15,7 +15,7 @@ public interface CourseDetailContract {
         void goToCourseUrl(String url);
         void onError(String error);
         void displayRecommendedCourse(List<Course> courses);
-
+        void goToCourseDetail(int id);
     }
 
     interface UserActionListener {
@@ -23,5 +23,6 @@ public interface CourseDetailContract {
         void enrollCourse();
         void goToCourse();
         void getRecommendedCourse(int courseId);
+        void viewCourseDetail(int position, Course course);
     }
 }
