@@ -24,7 +24,7 @@ Using a clean, maintainable MVP software architecture for Android application.
   + Change API_URL in file utils/Constance.java to address and port from server side;
   + Build and run
 
-## Third party used in project 
+## Third party libraries used in project 
   + https://github.com/blipinsk/RecyclerViewHeader
   + https://github.com/qiujuer/Genius-Android
   + https://github.com/square/picasso
