@@ -1,6 +1,6 @@
 var KNN_MAX = 5;
 var USERBASED_MAX = 5;
-var USERBASED_TRIGGER = 3;
+var USERBASED_TRIGGER = 2;
 
 var db = require('./db');
 var Learners = {};
@@ -272,15 +272,12 @@ Learners.getCommonCoursesOfKnn = function(id, cb){
 								}
 								if (count == KNN_MAX){
 									for (var i in countHistory){
-										if (countHistory[i] >= 2) {
+										if (countHistory[i] >= USERBASED_TRIGGER && userBasedCourses.length < USERBASED_MAX) {
 											userBasedCourses.push(topHistory[i]);
 										}
 									}
-									console.log(userBasedCourses);
 									cb(null, userBasedCourses);
 								}
-
-								
 							});
 						}
 					}
