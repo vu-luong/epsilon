@@ -21,6 +21,8 @@ import com.epsilon.R;
 import com.epsilon.commons.GenericRetainedToolbarFragment;
 import com.epsilon.models.entities.Course;
 import com.epsilon.screens.categorydetail.CourseListAdapter;
+import com.epsilon.screens.main.MainActivity;
+import com.epsilon.utils.Utils;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -34,7 +36,7 @@ import utils.Injection;
  * Created by AnhVu on 4/9/16.
  */
 public class CourseDetailFragment extends GenericRetainedToolbarFragment
-        implements CourseDetailContract.View, CourseListAdapter.OnCourseItemClick{
+        implements CourseDetailContract.View, CourseListAdapter.OnCourseItemClick {
 
     private static final String COURSE_ID_KEY = "course id";
     private CourseDetailContract.UserActionListener mUserActionListener;
@@ -107,8 +109,11 @@ public class CourseDetailFragment extends GenericRetainedToolbarFragment
 
         mUserActionListener.getRecommendedCourse(course.getId());
 
-        if (course.isLearned()) mGoToCourseButton.setText("VÀO LỚP");
-            else mGoToCourseButton.setText("ĐẾN KHÓA HỌC");
+
+        Utils.log(TAG, course.isLearned() + " ");
+
+        if (course.isLearned()) mGoToCourseButton.setText(R.string.go_to_class);
+        else mGoToCourseButton.setText(R.string.go_to_course);
 
     }
 
@@ -120,8 +125,9 @@ public class CourseDetailFragment extends GenericRetainedToolbarFragment
 
     @Override
     public void goToCourseUrl(String url) {
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        startActivity(browserIntent);
+        Intent mainIntent = MainActivity.makeIntent(getActivity(),
+                true, url);
+        startActivity(mainIntent);
     }
 
     @Override

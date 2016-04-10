@@ -2,6 +2,7 @@ package com.epsilon.screens.main;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     private static final String TAB_POSITION_KEY = "tab position";
+    private static final String IS_FROM_COURSE_KEY = "from course key";
+    private static final String IS_FROM_COURSE_URL_KEY = "url key";
     public static final int CATEGORY_TAB_POSITION = 1;
     public static final int COURSES_TAB_POSITION = 0;
     public static final int RECOMMEND_TAB_POSITION = 2;
@@ -28,6 +31,15 @@ public class MainActivity extends AppCompatActivity {
                 .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 .putExtra(TAB_POSITION_KEY, tabPosition);
     }
+
+    public static Intent makeIntent(Context context, boolean isFromEnrollCourse, String url) {
+        return makeIntent(context, COURSES_TAB_POSITION)
+                .putExtra(IS_FROM_COURSE_KEY, isFromEnrollCourse)
+                .putExtra(IS_FROM_COURSE_URL_KEY, url);
+    }
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +57,13 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             int tabPosition = getIntent().getIntExtra(TAB_POSITION_KEY, 0);
             goToTab(tabPosition);
+
+            if (getIntent().getBooleanExtra(IS_FROM_COURSE_KEY, false)) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(
+                        getIntent().getStringExtra(IS_FROM_COURSE_URL_KEY)
+                ));
+                startActivity(browserIntent);
+            }
         }
     }
 
