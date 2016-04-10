@@ -2,7 +2,6 @@ package com.epsilon.screens.recommend;
 
 import com.epsilon.models.course.CourseRepository;
 import com.epsilon.models.entities.Course;
-import com.epsilon.screens.courses.CoursesContract;
 
 import java.util.List;
 
@@ -21,14 +20,14 @@ public class RecommendPresenter implements RecommendContract.UserActionListener 
 
 
     @Override
-    public void getRecommendCourses() {
+    public void getFavoriteRecommendCourses() {
         mView.showProcessingIndicator(true);
 
-        mCourseRepository.getRecommendedCourseByHistory(new CourseRepository.CoursesListResultCallBack() {
+        mCourseRepository.getFavoriteRecommendedCourseByHistory(new CourseRepository.CoursesListResultCallBack() {
             @Override
             public void onSucceed(List<Course> courses) {
                 mView.showProcessingIndicator(false);
-                mView.displayRecommendCourse(courses);
+                mView.displayFavoriteRecommendCourse(courses);
             }
 
             @Override
@@ -38,6 +37,25 @@ public class RecommendPresenter implements RecommendContract.UserActionListener 
             }
         });
 
+    }
+
+    @Override
+    public void getUserBasedRecommendCourses() {
+        mView.showProcessingIndicator(true);
+
+        mCourseRepository.getUserBasedRecommendedCourseByHistory(new CourseRepository.CoursesListResultCallBack() {
+            @Override
+            public void onSucceed(List<Course> courses) {
+                mView.showProcessingIndicator(false);
+                mView.displayUserBasedRecommendCourse(courses);
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                mView.showProcessingIndicator(false);
+                mView.onError(errorMessage);
+            }
+        });
     }
 
     @Override

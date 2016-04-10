@@ -92,6 +92,9 @@ public class UserRepositoryApiImpl implements UserRepository {
                 .enqueue(new GenericRetrofitCallback<CheckUsernameExistResultJSON>() {
                     @Override
                     protected void onSucceed(CheckUsernameExistResultJSON result) {
+
+                        ServiceGenerator.resetService();
+
                         callBack.onOkUsernameNotExist();
                     }
 

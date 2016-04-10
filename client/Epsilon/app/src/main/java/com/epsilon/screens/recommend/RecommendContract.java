@@ -11,13 +11,15 @@ import java.util.List;
 public interface RecommendContract {
 
     interface View extends GenericViewInterface {
-        void displayRecommendCourse(List<Course> courses);
+        void displayFavoriteRecommendCourse(List<Course> courses);
+        void displayUserBasedRecommendCourse(List<Course> courses);
         void goToCourseDetail(int courseId);
         void onError(String error);
     }
 
     interface UserActionListener {
-        void getRecommendCourses();
+        void getFavoriteRecommendCourses();
+        void getUserBasedRecommendCourses();
         void viewCourseDetail(int position, Course course);
     }
 

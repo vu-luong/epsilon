@@ -33,7 +33,7 @@ public interface EpsilonMainService {
     Call<CoursesListResultJSON> getMyCourses();
 
     @GET("/learners/recommendations")
-    Call<CoursesListResultJSON> getRecommendedCourseByHistory();
+    Call<CoursesListResultJSON> getFavoriteRecommendedCourseByHistory();
 
     @POST("/learners/enroll")
     Call<GenericResultJSON> enrollCourse(@Body EnrollRequestJSON enrollRequestJSON);
