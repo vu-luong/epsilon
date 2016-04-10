@@ -42,8 +42,10 @@ public class MainActivity extends AppCompatActivity {
         setUpToolBar();
 
         // Go to appropriate tab
-        int tabPosition = getIntent().getIntExtra(TAB_POSITION_KEY, 0);
-        goToTab(tabPosition);
+        if (savedInstanceState == null) {
+            int tabPosition = getIntent().getIntExtra(TAB_POSITION_KEY, 0);
+            goToTab(tabPosition);
+        }
     }
 
     private void goToTab(int tabPosition) {
@@ -67,6 +69,19 @@ public class MainActivity extends AppCompatActivity {
         // Give the TabLayout the ViewPager
         tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(POSITION, tabLayout.getSelectedTabPosition());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        viewPager.setCurrentItem(savedInstanceState.getInt(POSITION));
     }
 
 

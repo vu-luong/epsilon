@@ -20,7 +20,8 @@ public class CourseDetailActivity extends GenericActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_holder);
-        initFragment(CourseDetailFragment.getInstance(getIntent().getIntExtra(COURSE_ID_KEY, 1)));
+        if (savedInstanceState == null)
+            initFragment(CourseDetailFragment.getInstance(getIntent().getIntExtra(COURSE_ID_KEY, 1)));
     }
 
     public static Intent makeIntent(Context context, int courseId) {

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.epsilon.commons.GenericRetainedFragment;
 import com.epsilon.customview.GridSpacingItemDecoration;
 import com.epsilon.models.entities.Category;
 import com.epsilon.screens.categorydetail.CategoryDetailActivity;
+import com.epsilon.utils.Utils;
 
 import java.util.List;
 
@@ -43,6 +45,9 @@ public class CategoryFragment extends GenericRetainedFragment implements Categor
         super.onCreate(savedInstanceState);
         mUserActionListener = new CategoryPresenter(this, Injection.provideCategoryRepository());
         mUserActionListener.getAllCategory();
+
+        mAdapter = new CategoryListAdapter(getActivity().getApplicationContext(),
+                this);
     }
 
     @Nullable
@@ -53,8 +58,9 @@ public class CategoryFragment extends GenericRetainedFragment implements Categor
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
 
+
+        super.onViewCreated(view, savedInstanceState);
         setUpCategoryList();
 
 
@@ -65,12 +71,8 @@ public class CategoryFragment extends GenericRetainedFragment implements Categor
 
         mLayoutManager = new GridLayoutManager(getActivity(), numOfColumn);
         mRecyclerView.setLayoutManager(mLayoutManager);
-
         mHeader.attachTo(mRecyclerView);
-
-        mAdapter = new CategoryListAdapter(getActivity(), this);
         mRecyclerView.setAdapter(mAdapter);
-
         int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.spacing);
         mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(numOfColumn, spacingInPixels, true));
     }

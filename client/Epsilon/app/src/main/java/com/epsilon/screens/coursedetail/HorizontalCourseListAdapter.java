@@ -21,9 +21,6 @@ public class HorizontalCourseListAdapter extends CourseListAdapter {
     @Override
     public CourseListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
                                                                      int viewType) {
-
-
-        Log.i(TAG, "calling this");
 //         create a new view
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_course_fixed_size, parent, false);
