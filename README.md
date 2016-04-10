@@ -11,3 +11,11 @@ Using NodeJS Express framework
 
 ## Client side:
 Using a clean, maintainable MVP software architecture for Android application.
+
+## Run project 
++ Server side :
+  + Install npm and run command :
+      - npm install;
+      - npm start;
+  
+      
