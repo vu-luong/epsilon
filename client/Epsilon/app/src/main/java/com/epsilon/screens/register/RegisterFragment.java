@@ -1,5 +1,6 @@
 package com.epsilon.screens.register;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,6 +11,8 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.ViewAnimator;
@@ -28,7 +31,7 @@ import utils.Injection;
 /**
  * Created by Dandoh on 4/9/16.
  */
-public class RegisterFragment extends GenericRetainedToolbarFragment implements RegisterContract.View {
+public class RegisterFragment extends GenericRetainedToolbarFragment implements RegisterContract.View, View.OnFocusChangeListener {
 
 
     @Bind(R.id.register_edt_password)
@@ -100,6 +103,9 @@ public class RegisterFragment extends GenericRetainedToolbarFragment implements 
             });
         }
 
+        mPasswordEditText.setOnFocusChangeListener(this);
+        mUsernameEditText.setOnFocusChangeListener(this);
+
         setUpSignUpWizardView();
         setUpSeekBars();
     }
@@ -164,9 +170,16 @@ public class RegisterFragment extends GenericRetainedToolbarFragment implements 
 
     @Override
     public void goToRegisterAddCategory() {
+        hideKeyboard(getView());
         if (mCurrentScreenIndex == 1) {
             wizardNext();
         }
+    }
+
+    private void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager = (InputMethodManager) getActivity()
+                .getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     @Override
@@ -198,7 +211,7 @@ public class RegisterFragment extends GenericRetainedToolbarFragment implements 
     public void goToMainScreen() {
         Utils.log(TAG, "register succeed");
 
-        Intent intent = MainActivity.makeIntent(getActivity(), MainActivity.CATEGORY_TAB_POSITION);
+        Intent intent = MainActivity.makeIntent(getActivity(), MainActivity.RECOMMEND_TAB_POSITION);
         getActivity().startActivity(intent);
     }
 
@@ -210,6 +223,13 @@ public class RegisterFragment extends GenericRetainedToolbarFragment implements 
     @Override
     public void displayRegisterError(String errorMessage) {
         Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        if (!hasFocus) {
+            hideKeyboard(v);
+        }
     }
 
     public static class CustomSeekBarOnTouchListener implements View.OnTouchListener {
@@ -240,8 +260,8 @@ public class RegisterFragment extends GenericRetainedToolbarFragment implements 
                 float xi = (maxWidth / (mNumOfLevel - 1)) * (i - 1);
                 Utils.log(TAG, "x" + i + " " + xi);
 
-                if (x >= xi - 1/(2 * mNumOfLevel) * maxWidth
-                        && x <= xi + 1/(2 * mNumOfLevel) * maxWidth) {
+                if (x >= xi - 1 / (2 * mNumOfLevel) * maxWidth
+                        && x <= xi + 1 / (2 * mNumOfLevel) * maxWidth) {
                     return i;
                 }
             }
