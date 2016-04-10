@@ -141,8 +141,15 @@ public class CourseDetailFragment extends GenericRetainedToolbarFragment
     }
 
     @Override
+    public void goToCourseDetail(int id) {
+        Intent intent = CourseDetailActivity.makeIntent(getActivity(), id);
+        startActivity(intent);
+        getActivity().finish();
+    }
+
+    @Override
     public void onClick(int position, Course course) {
-        //TODO
+        mUserActionListener.viewCourseDetail(position, course);
     }
 
     @Override

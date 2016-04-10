@@ -80,4 +80,9 @@ public class CourseDetailPresenter implements CourseDetailContract.UserActionLis
                 });
 
     }
+
+    @Override
+    public void viewCourseDetail(int position, Course course) {
+        mView.goToCourseDetail(course.getId());
+    }
 }
