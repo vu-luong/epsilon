@@ -116,6 +116,9 @@ public class CourseRepositoryApiImpl implements CourseRepository {
 
     @Override
     public void enrollCourse(int courseId, final EnrollCourseCallBack callBack) {
+        // information of course had changed, delete from cached
+        mCachedCourses.remove(courseId);
+
         ServiceGenerator.getEpsilonWebService()
                 .enrollCourse(new EnrollRequestJSON(courseId))
                 .enqueue(new GenericRetrofitCallback<GenericResultJSON>() {
