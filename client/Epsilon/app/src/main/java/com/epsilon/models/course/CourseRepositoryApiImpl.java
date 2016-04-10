@@ -31,12 +31,6 @@ public class CourseRepositoryApiImpl implements CourseRepository {
                 .enqueue(new GenericRetrofitCallback<CoursesListResultJSON>() {
                     @Override
                     protected void onSucceed(CoursesListResultJSON result) {
-
-                        List<Course> courses = result.getMessage();
-                        for (Course course: courses) {
-                            mCachedCourses.put(course.getId(), course);
-                        }
-
                         callBack.onSucceed(result.getMessage());
                     }
 
@@ -57,6 +51,7 @@ public class CourseRepositoryApiImpl implements CourseRepository {
                     .getCourseById(id).enqueue(new GenericRetrofitCallback<CourseResultJSON>() {
                 @Override
                 protected void onSucceed(CourseResultJSON result) {
+                    mCachedCourses.put(result.getMessage().getId(), result.getMessage());
                     callBack.onSucceed(result.getMessage());
                 }
 

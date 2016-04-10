@@ -35,4 +35,5 @@ public interface CourseRepository {
     interface EnrollCourseCallBack extends GenericCallback {
         void onSucceed();
     }
+
 }
