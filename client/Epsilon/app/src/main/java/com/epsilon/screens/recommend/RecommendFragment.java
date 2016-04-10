@@ -3,9 +3,8 @@ package com.epsilon.screens.recommend;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +17,7 @@ import com.epsilon.customview.GridSpacingItemDecoration;
 import com.epsilon.models.entities.Course;
 import com.epsilon.screens.categorydetail.CourseListAdapter;
 import com.epsilon.screens.coursedetail.CourseDetailActivity;
-import com.epsilon.utils.Utils;
+import com.epsilon.screens.coursedetail.HorizontalCourseListAdapter;
 
 import java.util.List;
 
@@ -32,22 +31,30 @@ public class RecommendFragment extends GenericRetainedFragment
         implements RecommendContract.View, CourseListAdapter.OnCourseItemClick {
 
     private RecommendContract.UserActionListener mUserActionListener;
-    private CourseListAdapter mCourseListAdapter;
 
-    @Bind(R.id.recommend_recycle_view)
-    RecyclerView mRecyclerView;
-    private RecyclerView.LayoutManager mLayoutManager;
+    @Bind(R.id.recommend_recycle_view_favorite)
+    RecyclerView mFavoriteRecyclerView;
+    private CourseListAdapter mFavoriteCourseListAdapter;
+    private RecyclerView.LayoutManager mFavoriteLayoutManager;
 
-    @Bind(R.id.recommend_refresh_layout)
-    SwipeRefreshLayout mSwipeRefreshLayout;
+
+    @Bind(R.id.recommend_recycle_view_user)
+    RecyclerView mUserBasedRecyclerView;
+    private CourseListAdapter mUserBasedCourseListAdapter;
+    private RecyclerView.LayoutManager mUserBasedLayoutManager;
+
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mCourseListAdapter = new CourseListAdapter(this);
+        mFavoriteCourseListAdapter = new HorizontalCourseListAdapter(this);
         mUserActionListener = new RecommendPresenter(this, Injection.provideCourseRepository());
-        mUserActionListener.getRecommendCourses();
+        mUserActionListener.getFavoriteRecommendCourses();
+
+        mUserBasedCourseListAdapter = new HorizontalCourseListAdapter(this);
+        mUserActionListener.getUserBasedRecommendCourses();
     }
 
     @Nullable
@@ -62,39 +69,51 @@ public class RecommendFragment extends GenericRetainedFragment
 
         setUpList();
 
-        setUpSwipeRefreshLayout();
+//        setUpSwipeRefreshLayout();
     }
 
-    private void setUpSwipeRefreshLayout() {
-
-        mSwipeRefreshLayout.setColorSchemeColors(
-                ContextCompat.getColor(getActivity(), R.color.colorPrimary),
-                ContextCompat.getColor(getActivity(), R.color.colorAccent),
-                ContextCompat.getColor(getActivity(), R.color.colorPrimaryDark));
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                // Load request, force update
-                mUserActionListener.getRecommendCourses();
-            }
-        });
-    }
+//    private void setUpSwipeRefreshLayout() {
+//
+//        mSwipeRefreshLayout.setColorSchemeColors(
+//                ContextCompat.getColor(getActivity(), R.color.colorPrimary),
+//                ContextCompat.getColor(getActivity(), R.color.colorAccent),
+//                ContextCompat.getColor(getActivity(), R.color.colorPrimaryDark));
+//        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                // Load request, force update
+//                mUserActionListener.getFavoriteRecommendCourses();
+//            }
+//        });
+//    }
 
     private void setUpList() {
 
         int numOfColumn = getResources().getInteger(R.integer.numOfColumn);
 
-        mLayoutManager = new GridLayoutManager(getActivity(), numOfColumn);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mCourseListAdapter);
         int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.spacing);
-        mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(numOfColumn, spacingInPixels, true));
+//        mFavoriteLayoutManager = new GridLayoutManager(getActivity(), numOfColumn);
+        mFavoriteLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        mFavoriteRecyclerView.setLayoutManager(mFavoriteLayoutManager);
+//        mFavoriteRecyclerView.addItemDecoration(new GridSpacingItemDecoration(numOfColumn, spacingInPixels, true));
+        mFavoriteRecyclerView.setAdapter(mFavoriteCourseListAdapter);
+
+//        mUserBasedLayoutManager = new GridLayoutManager(getActivity(), numOfColumn);
+        mUserBasedLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        mUserBasedRecyclerView.setLayoutManager(mUserBasedLayoutManager);
+//        mUserBasedRecyclerView.addItemDecoration(new GridSpacingItemDecoration(numOfColumn, spacingInPixels, true));
+        mUserBasedRecyclerView.setAdapter(mUserBasedCourseListAdapter);
 
     }
 
     @Override
-    public void displayRecommendCourse(List<Course> courses) {
-        mCourseListAdapter.setCourses(courses);
+    public void displayFavoriteRecommendCourse(List<Course> courses) {
+        mFavoriteCourseListAdapter.setCourses(courses);
+    }
+
+    @Override
+    public void displayUserBasedRecommendCourse(List<Course> courses) {
+        mUserBasedCourseListAdapter.setCourses(courses);
     }
 
     @Override
@@ -113,25 +132,4 @@ public class RecommendFragment extends GenericRetainedFragment
         mUserActionListener.viewCourseDetail(position, course);
     }
 
-    @Override
-    protected void showLoading() {
-        isProcessing = true;
-        if (mSwipeRefreshLayout != null) {
-            mSwipeRefreshLayout.post(new Runnable() {
-                @Override
-                public void run() {
-                    mSwipeRefreshLayout.setRefreshing(true);
-                }
-            });
-        }
-    }
-
-    @Override
-    protected void dismissLoading() {
-        isProcessing = false;
-
-        if (mSwipeRefreshLayout != null) {
-            mSwipeRefreshLayout.setRefreshing(false);
-        }
-    }
 }

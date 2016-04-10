@@ -9,7 +9,6 @@ import com.epsilon.models.webservice.json.EnrollRequestJSON;
 import com.epsilon.models.webservice.json.GenericResultJSON;
 
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created by AnhVu on 4/9/16.
@@ -99,8 +98,26 @@ public class CourseRepositoryApiImpl implements CourseRepository {
     }
 
     @Override
-    public void getRecommendedCourseByHistory(final CoursesListResultCallBack callBack) {
-        ServiceGenerator.getEpsilonWebService().getRecommendedCourseByHistory()
+    public void getFavoriteRecommendedCourseByHistory(final CoursesListResultCallBack callBack) {
+        ServiceGenerator.getEpsilonWebService().getFavoriteRecommendedCourseByHistory()
+                .enqueue(new GenericRetrofitCallback<CoursesListResultJSON>() {
+                    @Override
+                    protected void onSucceed(CoursesListResultJSON result) {
+                        callBack.onSucceed(result.getMessage());
+                    }
+
+                    @Override
+                    protected void onError(String message) {
+                        callBack.onError(message);
+                    }
+                });
+    }
+
+    @Override
+    public void getUserBasedRecommendedCourseByHistory(final CoursesListResultCallBack callBack) {
+
+        //TODO
+        ServiceGenerator.getEpsilonWebService().getFavoriteRecommendedCourseByHistory()
                 .enqueue(new GenericRetrofitCallback<CoursesListResultJSON>() {
                     @Override
                     protected void onSucceed(CoursesListResultJSON result) {

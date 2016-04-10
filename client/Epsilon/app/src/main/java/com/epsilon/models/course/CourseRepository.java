@@ -27,8 +27,9 @@ public interface CourseRepository {
 
     void getMyCourses(CoursesListResultCallBack callBack);
 
+    void getFavoriteRecommendedCourseByHistory(CoursesListResultCallBack callBack);
 
-    void getRecommendedCourseByHistory(CoursesListResultCallBack callBack);
+    void getUserBasedRecommendedCourseByHistory(CoursesListResultCallBack callBack);
 
     void enrollCourse(int courseId, EnrollCourseCallBack callBack);
 

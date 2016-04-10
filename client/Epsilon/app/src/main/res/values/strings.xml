@@ -21,6 +21,8 @@
     <string name="course_overview_demo">Demo</string>
     <string name="go_to_course">ĐẾN KHOÁ HỌC</string>
     <string name="go_to_class">VÀO LỚP HỌC</string>
+    <string name="base_on_favorite">Dựa trên các khoá bạn đã học</string>
+    <string name="base_on_user">Dựa trên người dùng giống bạn</string>
 
     <string-array name="category_colors">
         <item>#EDD7C7</item>
